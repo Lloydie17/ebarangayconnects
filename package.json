@@ -4,13 +4,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
-    "build": "npm install --legacy-peer-deps && npm run build",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
+    "@agm/core": "^3.0.0-beta.0",
     "@angular/animations": "^17.3.2",
     "@angular/common": "^17.3.2",
     "@angular/compiler": "^17.3.2",
@@ -48,8 +49,5 @@
     "ts-node": "^8.3.0",
     "tslint": "^6.1.0",
     "typescript": "^5.4.2"
-  },
-  "resolutions": {
-    "@angular/common": "10.2.5"
   }
 }

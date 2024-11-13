@@ -4,9 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
-    "build": {
-      "command": "npm install --force && npm run build"
-    },
+    "build": "npm ci --legacy-peer-deps && npm run build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -51,5 +49,8 @@
     "ts-node": "^8.3.0",
     "tslint": "^6.1.0",
     "typescript": "^5.4.2"
+  },
+  "resolutions": {
+    "@angular/common": "10.2.5"
   }
 }

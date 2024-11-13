@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve --open",
     "build": {
-      "command": "npm install --force && npm run build"
+      "command": "npm install --force --legacy-peer-deps && npm run build"
     },
     "test": "ng test",
     "lint": "ng lint",

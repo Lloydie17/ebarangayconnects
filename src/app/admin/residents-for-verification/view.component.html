@@ -1,0 +1,120 @@
+<div class="container">
+    <div class="card p-4">
+        <h5 class="card-title">View {{ resident.fullName }}'s Profile</h5>
+        <hr>
+        <form>
+            <!-- First row: Profile picture and name details -->
+            <div class="row mb-3">
+                <!-- Profile Picture (left) -->
+                <div class="col-md-3 text-center">
+                    <label for="profilePicture">Profile Picture</label>
+                    <div class="mb-3">
+                        <img [src]="resident.profilePicture" alt="Profile Picture" class="img-thumbnail" style="width: 200px; height: 200px;">
+                        <br>
+                    </div>
+                    <br>
+                    <label for="profilePicture">Government ID</label>
+                    <div class="mb-3">
+                        <img [src]="resident.idPicture" alt="Profile Picture" class="img-thumbnail" style="width: 200px; height: 200px;">
+                        <br>
+                    </div>
+                </div>
+
+                <!-- Resident details (right) -->
+                <div class="col-md-9">
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="firstName">Firstname</label>
+                            <input type="text" class="form-control" id="firstName" [(value)]="resident.firstName" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="middleName">Middlename</label>
+                            <input type="text" class="form-control" id="middleName" [(value)]="resident.middleName" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="lastName">Lastname</label>
+                            <input type="text" class="form-control" id="lastName" [(value)]="resident.lastName" disabled>
+                        </div>
+                    </div>
+
+                    <!-- Alias, Place of Birth, Birthdate -->
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="alias">Alias</label>
+                            <input type="text" class="form-control" id="alias" [(value)]="resident.alias" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="placeOfBirth">Place of Birth</label>
+                            <input type="text" class="form-control" id="placeOfBirth" [(value)]="resident.birthPlace" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="birthdate">Birthdate</label>
+                            <input type="date" class="form-control" id="birthdate" [(value)]="resident.birthDate" disabled>
+                        </div>
+                    </div>
+
+                    <!-- Age, Civil Status, Gender -->
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="age">Age</label>
+                            <input type="number" class="form-control" id="age" [(value)]="resident.age" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="civilStatus">Civil Status</label>
+                            <input type="text" class="form-control" id="civilStatus" [(value)]="resident.civilStatus" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="gender">Gender</label>
+                            <input type="text" class="form-control" id="gender" [(value)]="resident.gender" disabled>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="sitioId">Sitio</label>
+                            <input type="text" class="form-control" id="sitioId" [(value)]="resident.sitioId" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="householdId">Household Number</label>
+                            <input type="text" class="form-control" id="householdId" [(value)]="resident.householdId" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="categoryId">Category</label>
+                            <input type="text" class="form-control" id="categoryId" [(value)]="resident.categoryId" disabled>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="voterStatus">Voter Status</label>
+                            <input type="text" class="form-control" id="voterStatus" [(value)]="resident.isVoter" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="precintNo">Precint Number</label>
+                            <input type="text" class="form-control" id="precintNo" [(value)]="resident.precintNo" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="contactNum">Contact Number</label>
+                            <input type="text" class="form-control" id="contactNum" [(value)]="resident.contactNumber" disabled>
+                        </div>
+                    </div>
+
+                    <div class="col-md-20">
+                        <label for="emailAddress">Email Address</label>
+                        <input type="email" class="form-control" id="emailAddress" [(value)]="resident.email" disabled>
+                    </div>
+                    <div class="col-md-20">
+                        <label for="occupation">Occupation</label>
+                        <input type="text" class="form-control" id="occupation" [(value)]="resident.occupation" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end mt-5">
+                <a routerLink="/admin/verification" type="button" class="btn btn-secondary me-3">Cancel</a>
+                <button class="btn btn-success" (click)="approveResident(resident.residentId)">Approve</button>
+            </div>
+        </form>
+    </div>
+</div>

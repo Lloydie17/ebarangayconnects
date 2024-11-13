@@ -1,0 +1,136 @@
+<h1>Barangay Information</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="card mb-4 mb-xl-0">
+        <div class="card-header">Barangay Information</div>
+
+        <div class="row">
+            <div class="col-xl-4">
+                <div class="mb-4 mb-xl-0">
+                    <div class="card-body text-center">
+                        <div class="d-flex justify-content-between align-items-center ml-3 mb-3">
+                            <h5 class="mb-0">Barangay Captain</h5>
+                        </div>
+                        <img class="img-account-profile mb-2 border border-dark" [src]="previewUrl || barangay.barangayCaptainImg"  alt="{{ barangay.barangayCaptain }}">
+                        <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                        <label for="image">
+                            <input name="image" id="image" style="display:none;" type="file" (change)="onFileSelected($event, 'barangayCaptainImg')" class="form-control-file"/>
+                            <a class="btn btn-primary mb-3" style="color:#ffffff">Upload new image</a>
+                        </label>
+
+                        <div class="d-flex justify-content-between align-items-center ml-3 mb-3">
+                            <h5 class="mb-0">Barangay Logo</h5>
+                        </div>
+                        <img class="img-account-profile mb-2 border border-dark" [src]="previewUrlLogo || barangay.barangayLogo"  alt="{{ barangay.barangayName }}">
+                        <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                        <label for="image2">
+                            <input name="image2" id="image2" style="display:none;" type="file" (change)="onFileSelected($event, 'barangayLogo')" class="form-control-file"/>
+                            <a class="btn btn-primary" style="color:#ffffff">Upload new image</a>
+                        </label>
+
+                        <div class="ml-3 mb-3 mt-4">
+                            <div class="mb-3">
+                                <label class="medium mb-1 d-flex" for="barangayVision">Vision</label>
+                                <textarea type="text" formControlName="barangayVision" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.barangayVision.errors }" rows="7"></textarea>
+                                <div *ngIf="submitted && f.barangayVision.errors" class="invalid-feedback">
+                                    <div *ngIf="f.barangayVision.errors.required">Barangay Vision is required</div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="medium mb-1 d-flex" for="barangayMission">Mission</label>
+                                <textarea type="text" formControlName="barangayMission" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.barangayMission.errors }" rows="7"></textarea>
+                                <div *ngIf="submitted && f.barangayMission.errors" class="invalid-feedback">
+                                    <div *ngIf="f.barangayMission.errors.required">Barangayy Mission is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-xl-8">
+                <div class="mb-4">
+                    <div class="card-body">
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="medium mb-1" for="barangayCaptain">Barangay Captain Name</label>
+                                <input type="text" formControlName="barangayCaptain" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.barangayCaptain.errors }" placeholder="Enter Barangay Captain Name"/>
+                                <div *ngIf="submitted && f.barangayCaptain.errors" class="invalid-feedback">
+                                    <div *ngIf="f.barangayCaptain.errors.required">Barangay Captain Name is required</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="medium mb-1" for="barangayName">Barangay Name</label>
+                                <input type="text" formControlName="barangayName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.barangayName.errors }" placeholder="Enter Barangay Name"/>
+                                <div *ngIf="submitted && f.barangayName.errors" class="invalid-feedback">
+                                    <div *ngIf="f.barangayName.errors.required">Barangay Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="medium mb-1" for="barangayHallAddress">Barangay Hall Address</label>
+                                <input type="text" [ngClass]="{ 'is-invalid': submitted && f.barangayHallAddress.errors }" formControlName="barangayHallAddress" class="form-control" placeholder="Enter Barangay Hall Address" />
+                                <div *ngIf="submitted && f.barangayHallAddress.errors" class="invalid-feedback">
+                                    <div *ngIf="f.barangayHallAddress.errors.required">Barangay Hall Address is required</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="medium mb-1" for="barangayContactNum">Barangay Contact Information</label>
+                                <input type="text" [ngClass]="{ 'is-invalid': submitted && f.barangayContactNum.errors }" formControlName="barangayContactNum" class="form-control" placeholder="Enter Barangay Contact number" />
+                                <div *ngIf="submitted && f.barangayContactNum.errors" class="invalid-feedback">
+                                    <div *ngIf="f.barangayContactNum.errors.required">Barangay Contact Number is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="medium mb-1" for="barangayCaptainMessage">Message of Barangay Captain</label>
+                            <textarea type="text" formControlName="barangayCaptainMessage" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.barangayCaptainMessage.errors }" rows="7"></textarea>
+                            <div *ngIf="submitted && f.barangayCaptainMessage.errors" class="invalid-feedback">
+                                <div *ngIf="f.barangayCaptainMessage.errors.required">Barangay Captain Message is required</div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="medium mb-1" for="barangayHistoricalInfo">Historical Background</label>
+                            <textarea type="text" formControlName="barangayHistoricalInfo" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.barangayHistoricalInfo.errors }" rows="7"></textarea>
+                            <div *ngIf="submitted && f.barangayHistoricalInfo.errors" class="invalid-feedback">
+                                <div *ngIf="f.barangayHistoricalInfo.errors.required">Barangayy Historical Background is required</div>
+                            </div>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="medium mb-1" for="barangayLat">Latitude</label>
+                                <input type="text" formControlName="barangayLat" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.barangayLat.errors }"/>
+                                <div *ngIf="submitted && f.barangayLat.errors" class="invalid-feedback">
+                                    <div *ngIf="f.barangayLat.errors.required">Barangay Latitude is required</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="medium mb-1" for="barangayLong">Longitude</label>
+                                <input type="text" [ngClass]="{ 'is-invalid': submitted && f.barangayLong.errors }" formControlName="barangayLong" class="form-control" />
+                                <div *ngIf="submitted && f.barangayLong.errors" class="invalid-feedback">
+                                    <div *ngIf="f.barangayLong.errors.required">Barangay Longitude is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="map-section border border-dark">
+                              <div id="map-container" class="map-container">
+                                  <div id="map" style="height: 400px; width: 100%;"></div>
+                                  <button class="geolocate-button" type="button" (click)="getUserLocation()"></button>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <a routerLink="/admin/barangay" class="btn btn-secondary me-2">Cancel</a>
+                            <button type="submit" [disabled]="loading" class="btn btn-primary mr-2">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                Update
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

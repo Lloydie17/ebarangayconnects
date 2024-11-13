@@ -1,0 +1,596 @@
+/* You can add global styles to this file, and also import other style files */
+@import url(./sidenav.less);
+@import url(./responsive.less);
+@import url(./display.less);
+@import url(./dashboard.less);
+@import url(./profile.less);
+
+.leaflet-routing-container {
+    display: none;
+}
+
+a { cursor: pointer; }
+
+body {
+    background-color: #4C7766;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.app-container {
+    min-height: 320px;
+}
+
+nav {
+    max-width: 100%;
+}
+
+.user-nav {
+    position: absolute;
+    background-color: #EBE6E0;
+    width: 100%;
+}
+
+.user-nav a {
+    color: #4C7766;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.user-nav a:hover {
+    color: #000000;
+}
+
+.admin-nav {
+    position: absolute;
+    background-color: #EBE6E0;
+    width: 100%;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.admin-nav a {
+    color: #4C7766;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.admin-nav a:hover {
+    color: #000000;
+}
+
+.btn-delete-account {
+    width: 65px;
+    text-align: center;
+    box-sizing: content-box;
+}
+
+.verified-label {
+    display: inline-block;
+    background-color: #4C7766; 
+    color: white;
+    padding: 0.375rem 0.75rem; 
+    font-size: 0.875rem;       
+    border-radius: 0.25rem;    
+    vertical-align: middle;    
+}
+
+/* ANNOUNCEMENT SECTION */
+
+.announcement-section {
+    position: relative;
+    width: 100%;
+    margin-bottom: 11%;
+    margin-top: 60px;
+}
+
+.announcement-section .announcement-header {
+    color: #EBE6E0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+.announcement-container {
+    padding: 10px 0;
+    margin-top: 20px; 
+    display: flex;          
+    flex-wrap: wrap;       
+    justify-content: center; 
+    gap: 24px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.announcement-content {
+    margin-bottom: 76px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    max-width: 100%; 
+}
+
+/* Card styling for announcements */
+.card-announcement {
+    background-color: #EBE6E0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 350px;
+    height: 450px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+}
+
+.card-announcement:hover {
+    transform: scale(1.03);
+}
+
+.card-body-announcement {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* Image placeholder styling */
+.image-placeholder {
+    width: 100%;
+    height: 150px;
+    background-color: #EBE6E0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image fills the placeholder area proportionally */
+}
+
+/* Title and description styling */
+.announcement-title {
+    color: #333;
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+}
+
+
+.announcement-details {
+    font-size: 15px;
+    color: #333;
+    margin: 10px 0;
+    text-align: justify;
+    line-height: 1.6;
+}
+
+.read-more {
+    margin-top: auto;
+    color: #EBE6E0;
+    text-decoration: none;
+    font-size: 16px;
+    align-self: self-start;
+    margin-top: auto;
+    background-color: #4C7766;
+}
+
+.read-more:hover {
+    color: #EBE6E0;
+    background-color: #75837d;
+}
+
+.banner {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+}
+.content {
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.content-title {
+    color: #00796b;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 90px;
+    font-weight: bold;
+}
+
+.content-date {
+    color: #fcac42;
+    margin-left: 90px;
+    line-height: 1.6;
+    font-weight: 600;
+}
+
+blockquote {
+    border-left: 5px solid rgba(0,0,0,0.05);
+    margin-left: 90px;
+    margin-right: 90px;
+    color: #000000;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.content-description {
+    margin-left: 20px;
+    margin-right: 20px;
+    line-height: 2;
+    white-space: pre-line;
+}
+
+/* -S SECTION */
+
+.services-section {
+    position: relative;
+    width: 100%;
+    margin-top: 60px;
+}
+
+.services-section .services-header {
+    color: #EBE6E0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 45px;
+}
+
+.info {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.services-container {
+    background-color: #EBE6E0;
+    padding: 20px 0;
+    margin-top: 130px; 
+    width: 99.35vw; 
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    box-sizing: border-box;
+    display: flex;          
+    flex-wrap: wrap;       
+    justify-content: center; 
+}
+
+.services-content {
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    max-width: 100%; 
+}
+
+.card2 {
+    background-color: #EBE6E0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgb(0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 300px;
+    margin-top: -100px;
+    margin-bottom: 70px;
+}
+
+.card2 img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+}
+
+.card2 h2 {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: #000000;
+}
+
+.card2 p {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+.card2 button {
+    background-image: url('../assets/Proceed.svg');
+    background-position-x: 10px;
+    background-position-y: 14px;
+    background-size: 40px 15px;
+    background-repeat: no-repeat;
+    background-color: #4C7766;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    color: #FCF6F5;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 30px;
+    cursor: pointer;
+    margin-top: 15px;
+    text-indent: 10px;
+}
+
+.card-body-2{
+    -ms-flex:1 1 auto;
+    flex:1 1 auto;
+    min-height:1px;
+    padding:1.25rem
+}
+
+
+/* MAP SECTION */
+.map-section {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.map-container {
+    position: relative;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+    z-index: 1;
+}
+
+.geolocate-button {
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/ebarangayconnect-cbd22.appspot.com/o/Locate.svg?alt=media&token=69c03a08-efd4-4444-9c04-8876180acb69');
+    background-position-x: 0px;
+    background-position-y: 5px;
+    background-size: 30px 20px;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 20%;
+    left: 12px;
+    z-index: 1000; /* Ensure the button is on top of the map */
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 29px;
+    height: 29px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.geolocate-button:hover {
+    background-color: #f4f4f4;
+}
+
+.request-header {
+    color: #4C7766;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.req-text {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #4C7766;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.req-button {
+    border: none;
+    background-color: #4C7766;
+    color: #EBE6E0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    width: 80px;
+    height: 40px;
+    border-radius: 4px;
+    text-align: center;
+    display: inline-block;
+}
+
+.req-button:hover {
+    background-color: transparent;
+    border: 2px solid #4C7766;
+    color: #4C7766;
+}
+
+/* ALERT SECTION */
+
+ /* Main alert container fixed at bottom right */
+.alert-container {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: auto;
+    padding: 0;
+    margin: 0;
+    z-index: 1000; /* Make sure it's above other elements */
+}
+
+/* Wrapper for the alerts to manage spacing */
+.alert-wrapper {
+    max-width: 300px; /* Limit the alert width */
+    width: 100%;
+}
+
+/* Styling for the individual alert boxes */
+.alert-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem; /* Add space between multiple alerts */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Alert styles remain unchanged */
+.alert-box.alert-success {
+    background-color: #e6f7f1;
+    border-left: 4px solid #28a745;
+}
+
+.alert-box.alert-danger {
+    background-color: #fcebea;
+    border-left: 4px solid #dc3545;
+}
+
+.alert-box.alert-warning {
+    background-color: #fff4e5;
+    border-left: 4px solid #ffc107;
+}
+
+.alert-box.alert-info {
+    background-color: #e7f3ff;
+    border-left: 4px solid #17a2b8;
+}
+
+/* Styling for the close button */
+.close-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+/* Alert message */
+.alert-message {
+    font-size: 1rem;
+    margin: 0;
+    padding-right: 2rem; /* Space for the close button */
+}
+
+/* Notifications */
+
+.notification-wrapper {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .notification-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #fafafa;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 400px; /* Max height of the dropdown */
+    overflow-y: auto; /* Enable vertical scroll */
+  }
+  
+  .dropdown-header {
+    padding-top: 15px;
+    color: #212529;
+  }
+
+  .dropdown-header h1 {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  .notification-info {
+    padding-top: 5px;
+    padding-left: 17px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.04rem;
+  }
+  
+  .notification-list {
+    list-style: none;
+    margin: 0;
+    padding-left: 10px;
+  }
+  
+  .notification-item {
+    padding: 10px;
+    border-bottom: 1px solid #eaeaea;
+  
+    &:last-child {
+      border-bottom: none;
+    }
+  
+    a {
+      text-decoration: none;
+      color: #333;
+  
+      &:hover {
+        color: #007bff;
+      }
+    }
+  }
+
+  .notification-item:hover {
+    background-color: rgba(51, 51, 51, 0.05);
+  }
+
+  .notification-item a {
+    font-weight: 500;
+  }
+
+  .no-notification {
+    padding: 7px;
+    border-bottom: 1px solid #eaeaea;
+    color: #333;
+    font-weight: 500;
+  }
+
+  .timestamp {
+    font-size: 0.85rem;
+    color: #0866FF;
+    font-weight: 600;
+    display: block;
+}
+
+.notification-dropdown::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.notification-dropdown::-webkit-scrollbar-track {
+    background-color: #f1f1f1; 
+    border-radius: 10px; 
+}
+
+.notification-dropdown::-webkit-scrollbar-thumb {
+    background-color: #b0b0b0; 
+    border-radius: 10px; 
+}
+
+.notification-dropdown::-webkit-scrollbar-thumb:hover {
+    background-color: #999; 
+}
+  
+
+.barangay-info {
+    white-space: pre-line;
+}

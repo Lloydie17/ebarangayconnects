@@ -1,0 +1,16 @@
+<div class="p-4">
+    <div class="container">
+        <main style="background-color: #EBE6E0; padding: 100px;">
+            <div>
+                <img class="banner" [src]="announcement.announcementImage" alt="{{ announcement.announcementTitle || 'Image not available' }}">
+                <div class="content">
+                    <h2 class="content-title">{{ announcement.announcementTitle }}</h2>
+                    <p class="content-date">{{ announcement.announcementDate | date: 'longDate' }}</p>
+                    <blockquote>
+                        <p class="content-description">{{ announcement.announcementDescription }}</p>
+                    </blockquote>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

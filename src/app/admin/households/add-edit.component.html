@@ -1,0 +1,58 @@
+<h1 *ngIf="isAddMode">Add Household</h1>
+<h1 *ngIf="!isAddMode">Edit Household</h1>
+<div class="p-4">
+    <div class="container">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Household Number</label>
+                    <input type="text" formControlName="householdNo" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.householdNo.errors }" />
+                    <div *ngIf="submitted && f.householdNo.errors" class="invalid-feedback">
+                        <div *ngIf="f.householdNo.errors.required">Household Number is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Household Owner</label>
+                    <input type="text" formControlName="householdOwner" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.householdOwner.errors }" />
+                    <div *ngIf="submitted && f.householdOwner.errors" class="invalid-feedback">
+                        <div *ngIf="f.householdOwner.errors.required">Household Owner is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Household Latitude</label>
+                    <input type="text" formControlName="householdLat" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.householdLat.errors }" />
+                    <div *ngIf="submitted && f.householdLat.errors" class="invalid-feedback">
+                        <div *ngIf="f.householdLat.errors.required">Household Latitude is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>Household Longitude</label>
+                    <input type="text" formControlName="householdLong" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.householdLong.errors }" />
+                    <div *ngIf="submitted && f.householdLong.errors" class="invalid-feedback">
+                        <div *ngIf="f.householdLong.errors.required">Household Longitude is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="map-section">
+                  <div id="map-container" class="map-container">
+                      <div id="map" style="height: 400px; width: 100%;"></div>
+                      <button class="geolocate-button" type="button" (click)="getUserLocation()"></button>
+                  </div>
+                </div>
+            </div>
+  
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end">
+                <a routerLink="/admin/households" class="btn btn-secondary me-2">Cancel</a>
+                <button [disabled]="loading" class="btn btn-success">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

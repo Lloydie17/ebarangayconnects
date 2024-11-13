@@ -1,0 +1,40 @@
+<h1 *ngIf="isAddMode">Add Sitio</h1>
+<h1 *ngIf="!isAddMode">Edit Sitio</h1>
+<div class="p-4">
+    <div class="container">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">  
+                <!-- Barangay -->
+                <div class="col-md-3 mb-3">
+                    <label for="barangayId">Barangay</label>
+                    <select formControlName="barangayId" [ngClass]="{ 'is-invalid': submitted && f.barangayId.errors }" class="select-class form-control custom-select-with-caret">
+                        <option value="" disabled selected>Select Barangay</option>
+                        <option *ngFor="let barangay of barangays" [value]="barangay.barangayId">{{ barangay.barangayName }}</option>
+                    </select>
+                    <div *ngIf="submitted && f.barangayId.errors" class="invalid-feedback">
+                        <div *ngIf="f.barangayId.errors.required">Barangay is required</div>
+                    </div>
+                </div>
+
+                <!-- Sitio Name -->
+                <div class="col-md-3 mb-3">
+                      <label for="sitioName">Sitio Name</label>
+                      <input type="text" [ngClass]="{ 'is-invalid': submitted && f.sitioName.errors }" formControlName="sitioName" class="form-control" placeholder="Enter Sitio Name" />
+                      <div *ngIf="submitted && f.sitioName.errors" class="invalid-feedback">
+                          <div *ngIf="f.sitioName.errors.required">Name of Sitio is required</div>
+                      </div>
+                </div>
+            </div>
+  
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end">
+                <a routerLink="/admin/sitios" class="btn btn-secondary me-2">Cancel</a>
+                <button [disabled]="loading" class="btn btn-success">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+  

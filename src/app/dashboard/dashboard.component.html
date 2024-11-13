@@ -1,0 +1,116 @@
+<div class="dashboard">
+    <div class="container">
+        <div class="dashboard-section">
+            <div class="dashboard-header">
+                <h3 class="mb-3 menu-title">Dashboard</h3>
+            </div>
+        </div>
+        <div class="dashboard-container">
+            <div class="dashboard-content">
+                <div class="population-card">
+                    <div class="population-card-body">
+                        <div class="population-card-header">
+                            <img src="../../assets/icons/population.svg" alt="Form">
+                            <h3>POPULATION</h3>
+                        </div>
+                        <p class="total-number">{{ totalPopulation }}</p>
+                        <hr>
+                        <div class="dashboard-card-footer">Total Population</div>
+                    </div>
+                </div>
+                <div class="gender-card">
+                    <div class="gender-card-body">
+                        <div class="gender-card-header">
+                            <img src="../../assets/icons/male.svg" alt="Form">
+                            <h3>MALE</h3>
+                        </div>
+                        <div class="dashboard-info">
+                            <p class="total-number">{{ totalMale }}</p>
+                            <hr>
+                            <div class="dashboard-card-footer">Total Male</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gender-card">
+                    <div class="gender-card-body">
+                        <div class="gender-card-header">
+                            <img src="../../assets/icons/female.svg" alt="Form">
+                            <h3>FEMALE</h3>
+                        </div>
+                        <div class="dashboard-info">
+                            <p class="total-number">{{ totalFemale }}</p>
+                            <hr>
+                            <div class="dashboard-card-footer">Total Female</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="voters-card">
+                    <div class="voters-card-body">
+                        <div class="voters-card-header">
+                            <img src="../../assets/icons/fingerprint.svg" alt="Form">
+                            <h3>VOTERS</h3>
+                        </div>
+                        <div class="dashboard-info">
+                            <p class="total-number">{{ totalVoters }}</p>
+                            <hr>
+                            <div class="dashboard-card-footer">Total Voters</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="voters-card">
+                    <div class="voters-card-body">
+                        <div class="voters-card-header">
+                            <img src="../../assets/icons/fingerprint.svg" alt="Form">
+                            <h3>NON-VOTERS</h3>
+                        </div>
+                        <div class="dashboard-info">
+                            <p class="total-number">{{ totalNonVoters }}</p>
+                            <hr>
+                            <div class="dashboard-card-footer">Total Non-Voters</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-card-body">
+                        <div class="project-card-header">
+                            <img src="../../assets/icons/folder.svg" alt="Form">
+                            <h3>PROJECT</h3>
+                        </div>
+                        <div class="dashboard-info">
+                            <p class="total-number">4</p>
+                            <hr>
+                            <div class="dashboard-card-footer">Total Project</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sitio-card">
+                    <div class="sitio-card-body">
+                        <div class="sitio-card-header">
+                            <img src="../../assets/icons/sitio.svg" alt="Form">
+                            <h3>SITIO</h3>
+                        </div>
+                        <div class="dashboard-info">
+                            <p class="total-number">13</p>
+                            <hr>
+                            <div class="dashboard-card-footer">Total Sitio</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="revenue-card">
+                    <div class="revenue-card-body">
+                        <div class="revenue-card-header">
+                            <img src="../../assets/icons/money.svg" alt="Form">
+                            <h3>REVENUE</h3>
+                        </div>
+                        <div class="dashboard-info">
+                            <p class="total-number">₱ {{ totalRevenue.toFixed(2) }}</p>
+                            <hr>
+                            <div class="dashboard-card-footer">Total Revenue</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  

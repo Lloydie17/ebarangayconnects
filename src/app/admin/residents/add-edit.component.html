@@ -1,0 +1,203 @@
+<h1 *ngIf="isAddMode">Add Resident</h1>
+<h1 *ngIf="!isAddMode">Edit Resident</h1>
+<div class="p-4">
+    <div class="container">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <!-- Firstname -->
+                <div class="col-md-3 mb-3">
+                    <label for="firstName">Firstname</label>
+                    <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" placeholder="Enter Firstname" />
+                    <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                        <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                    </div>
+                </div>
+  
+                <!-- Middlename -->
+                <div class="col-md-3 mb-3">
+                    <label for="middleName">Middlename</label>
+                    <input type="text" formControlName="middleName" class="form-control" placeholder="Enter Middlename" />
+                </div>
+  
+                <!-- Lastname -->
+                <div class="col-md-3 mb-3">
+                    <label for="lastName">Lastname</label>
+                    <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" placeholder="Enter Lastname" />
+                    <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                        <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                    </div>
+                </div>
+  
+                <!-- Alias -->
+                <div class="col-md-3 mb-3">
+                    <label for="alias">Alias</label>
+                    <input type="text" formControlName="alias" class="form-control" placeholder="Enter Alias" />
+                </div>
+  
+                <!-- Birthdate -->
+                <div class="col-md-3 mb-3">
+                      <label for="birthDate">Birthdate</label>
+                      <input type="date" formControlName="birthDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.birthDate.errors }" />
+                      <div *ngIf="submitted && f.birthDate.errors" class="invalid-feedback">
+                          <div *ngIf="f.birthDate.errors.required">Birthdate is required</div>
+                      </div>
+                </div>
+  
+                <!-- Birthplace -->
+                <div class="col-md-3 mb-3">
+                      <label for="birthPlace">Birthplace</label>
+                      <input type="text" [ngClass]="{ 'is-invalid': submitted && f.birthPlace.errors }" formControlName="birthPlace" class="form-control" placeholder="Enter Birthplace" />
+                      <div *ngIf="submitted && f.birthPlace.errors" class="invalid-feedback">
+                          <div *ngIf="f.birthPlace.errors.required">Birthplace is required</div>
+                      </div>
+                </div>
+  
+                <!-- Civil Status -->
+                <div class="col-md-3 mb-3">
+                      <label for="civilStatus">Civil Status</label>
+                      <select formControlName="civilStatus" [ngClass]="{ 'is-invalid': submitted && f.civilStatus.errors }" class="select-class form-control custom-select-with-caret">
+                              <option value="" disabled selected>Select Civil Status</option>
+                              <option value="Single">Single</option>
+                              <option value="Married">Married</option>
+                              <option value="Widowed">Widowed</option>
+                              <option value="Divorced">Divorced</option>
+                      </select>
+                      <div *ngIf="submitted && f.civilStatus.errors" class="invalid-feedback">
+                          <div *ngIf="f.civilStatus.errors.required">Civil Status is required</div>
+                      </div>
+                </div>
+  
+                <!-- Gender -->
+                <div class="col-md-3 mb-3">
+                      <label for="gender">Gender</label>
+                      <select formControlName="gender" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }" class="select-class form-control custom-select-with-caret">
+                              <option value="" disabled selected>Select Gender</option>
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
+                      </select>
+                      <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                          <div *ngIf="f.gender.errors.required">Gender is required</div>
+                      </div>
+                </div>
+  
+                <!-- Occupation -->
+                <div class="col-md-3 mb-3">
+                      <label for="occupation">Occupation</label>
+                      <input type="text" [ngClass]="{ 'is-invalid': submitted && f.occupation.errors }" formControlName="occupation" class="form-control" placeholder="Enter Occupation" />
+                      <div *ngIf="submitted && f.occupation.errors" class="invalid-feedback">
+                          <div *ngIf="f.occupation.errors.required">Occupation is required</div>
+                      </div>
+                </div>
+  
+                <!-- Email -->
+                <div class="col-md-3 mb-3">
+                    <label for="email">Email</label>
+                    <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="Enter Email" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                    </div>
+                </div>
+  
+                <!-- Contact Number -->
+                <div class="col-md-3 mb-3">
+                      <label for="contactNumber">Contact Number</label>
+                      <input type="text" [ngClass]="{ 'is-invalid': submitted && f.contactNumber.errors }" formControlName="contactNumber" class="form-control" placeholder="Enter Contact Number" />
+                      <div *ngIf="submitted && f.contactNumber.errors" class="invalid-feedback">
+                          <div *ngIf="f.contactNumber.errors.required">Contact Number is required</div>
+                      </div>
+                </div>
+  
+                <!-- Precinct Number -->
+                <div class="col-md-3 mb-3">
+                    <label for="precintNo">Precinct Number</label>
+                    <input type="text" formControlName="precintNo" [disabled]="!form.get('isVoter')?.value" class="form-control" placeholder="Enter Precinct Number" />
+                </div>
+  
+                <!-- Sitio -->
+                <div class="col-md-3 mb-3">
+                      <label for="sitioId">Sitio</label>
+                      <select formControlName="sitioId" [ngClass]="{ 'is-invalid': submitted && f.sitioId.errors }" class="select-class form-control custom-select-with-caret">
+                          <option value="" disabled selected>Select Sitio</option>
+                          <option *ngFor="let sitio of sitios" [value]="sitio.sitioId">{{ sitio.sitioName }}</option>
+                      </select>
+                      <div *ngIf="submitted && f.sitioId.errors" class="invalid-feedback">
+                          <div *ngIf="f.sitioId.errors.required">Sitio is required</div>
+                      </div>
+                </div>
+  
+                <!-- Household Number -->
+                <div class="col-md-3 mb-3">
+                      <label for="householdId">Household Number</label>
+                      <select formControlName="householdId" [ngClass]="{ 'is-invalid': submitted && f.householdId.errors }" class="select-class form-control custom-select-with-caret">
+                          <option value="" disabled selected>Select Household Number</option>
+                          <option *ngFor="let household of households" [value]="household.householdId">{{ household.householdNo }}</option>
+                      </select>
+                      <div *ngIf="submitted && f.householdId.errors" class="invalid-feedback">
+                          <div *ngIf="f.householdId.errors.required">Sitio is required</div>
+                      </div>
+                </div>
+  
+                <!-- Category -->
+                <div class="col-md-3 mb-3">
+                      <label for="categoryId">Category</label>
+                      <select formControlName="categoryId" [ngClass]="{ 'is-invalid': submitted && f.categoryId.errors }" class="select-class form-control custom-select-with-caret">
+                            <option value="" disabled selected>Select Category</option>
+                            <option *ngFor="let category of categories" [value]="category.categoryId">{{ category.category }}</option>
+                      </select>
+                      <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+                          <div *ngIf="f.category.errors.required">Sitio is required</div>
+                      </div>
+                </div>
+  
+                <!-- Are you a voter? -->
+                <div class="col-md-3 mb-3">
+                      <label for="isVoter">Are you a voter?</label>
+                      <select formControlName="isVoter" [ngClass]="{ 'is-invalid': submitted && f.isVoter.errors }" class="select-class form-control custom-select-with-caret">
+                              <option [ngValue]="true">Yes</option>
+                              <option [ngValue]="false" selected>No</option>
+                      </select>
+                      <div *ngIf="submitted && f.isVoter.errors" class="invalid-feedback">
+                          <div *ngIf="f.isVoter.errors.required">This is required</div>
+                      </div>
+                </div>
+  
+                <!-- Upload Profile Picture -->
+                <div *ngIf="isAddMode" class="col-md-6 mb-3">
+                    <label for="idPicture">Upload Profile Picture</label>
+                    <input type="file" (change)="onFileSelected($event, 'profilePicture')" formControlName="idPicture" class="form-control" id="profilePicture" />
+                </div>
+  
+                <!-- Upload Government ID -->
+                <div *ngIf="isAddMode" class="col-md-6 mb-3">
+                    <label for="idPicture">Upload Government ID</label>
+                    <input type="file" (change)="onFileSelected($event, 'idPicture')" formControlName="idPicture" class="form-control" id="idPicture" />
+                </div>
+
+                <!-- Change Profile Picture -->
+                <div *ngIf="!isAddMode" class="col-md-6 mb-3">
+                    <label>Change Profile Picture</label> <br/>
+                    <label for="profilePicture">
+                        <input name="profilePicture" id="profilePicture" style="display:none;" type="file" (change)="onFileSelected($event, 'profilePicture')" class="form-control-file"/>
+                        <img [src]="previewUrl || residents.profilePicture" alt="{{ residents.firstName }}" style="border: 1px solid #303030; width: 200px; height: 200px; cursor: pointer;"/>
+                    </label>
+                </div>
+
+                <div *ngIf="!isAddMode" class="col-md-6 mb-3">
+                    <label>Government ID</label> <br/>
+                    <img [src]="residents.idPicture" alt="{{ residents.firstName }}" style="border: 1px solid #303030; width: 200px; height: 200px;"/>
+                </div>
+            </div>
+  
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end">
+                <a routerLink="/admin/residents" class="btn btn-secondary me-2">Cancel</a>
+                <button [disabled]="loading" class="btn btn-success">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+  

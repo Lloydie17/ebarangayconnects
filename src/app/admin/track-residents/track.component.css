@@ -1,0 +1,13 @@
+.map-container {
+    position: relative;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+}
+
+.resident-name {
+    margin-top: 10px;
+    font-weight: bold;
+}

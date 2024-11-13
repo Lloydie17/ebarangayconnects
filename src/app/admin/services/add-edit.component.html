@@ -1,0 +1,62 @@
+<h1 *ngIf="isAddMode">Add Services</h1>
+<h1 *ngIf="!isAddMode">Edit Services</h1>
+<div class="p-4">
+    <div class="container">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">  
+                <!-- Services Name -->
+                <div class="col-md-3 mb-3">
+                      <label for="servicesName">Services</label>
+                      <input type="text" [ngClass]="{ 'is-invalid': submitted && f.servicesName.errors }" formControlName="servicesName" class="form-control" placeholder="Enter Services Name" />
+                      <div *ngIf="submitted && f.servicesName.errors" class="invalid-feedback">
+                          <div *ngIf="f.servicesName.errors.required">Name of Services is required</div>
+                      </div>
+                </div>
+
+                <!-- Services Type -->
+                <div class="col-md-3 mb-3">
+                    <label>Service Type</label>
+                    <select formControlName="servicesType" class="form-control select-class custom-select-with-caret" [ngClass]="{ 'is-invalid': submitted && f.servicesType.errors }">
+                        <option value="" selected disabled>Select Services Type</option>
+                        <option value="Certificate">Certificate</option>
+                        <option value="Permit">Permit</option>
+                        <option value="Emergency">Emergency</option>
+                    </select>
+                    <div *ngIf="submitted && f.servicesType.errors" class="invalid-feedback">
+                        <div *ngIf="f.servicesType.errors.required">Type of service is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Services Fee -->
+                <div class="col-md-3 mb-3">
+                    <label for="servicesFee">Services Fee</label>
+                    <input type="text" [ngClass]="{ 'is-invalid': submitted && f.servicesFee.errors }" formControlName="servicesFee" class="form-control" placeholder="Enter Services Fee" />
+                    <div *ngIf="submitted && f.servicesFee.errors" class="invalid-feedback">
+                        <div *ngIf="f.servicesFee.errors.required">Services Fee is required</div>
+                    </div>
+                </div>
+
+                <!-- Services Details -->
+                <div class="col-md-6 mb-3">
+                    <label for="servicesDetails">Description</label>
+                    <textarea type="text" [ngClass]="{ 'is-invalid': submitted && f.servicesDetails.errors }" formControlName="servicesDetails" class="form-control" placeholder="Enter Services Description" rows="3"></textarea>
+                    <div *ngIf="submitted && f.servicesDetails.errors" class="invalid-feedback">
+                        <div *ngIf="f.servicesDetails.errors.required">Description of Services is required</div>
+                    </div>
+                </div>
+            </div>
+  
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end">
+                <a routerLink="/admin/services" class="btn btn-secondary me-2">Cancel</a>
+                <button [disabled]="loading" class="btn btn-success">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+  

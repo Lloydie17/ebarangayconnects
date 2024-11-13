@@ -1,0 +1,78 @@
+<div class="display-section">
+    <div class="display-header">
+        <h3 class="mb-3 menu-title">Household Record</h3>
+    </div>
+
+    <div class="display-container">
+        <div class="display-card-content">
+            <div class="display-card-header d-flex justify-content-between align-items-center mb-3">
+                <p class="mb-0">List of Household</p>
+                <div class="button-group">
+                    <a routerLink="add" class="btn btn-display btn-sm me-2">Add Household</a>
+                </div>
+            </div>
+
+            <!-- Show entries and search -->
+            <div class="d-flex justify-content-between mb-3">
+                <div class="d-flex align-items-center">
+                    <label for="entries" class="me-2">Show</label>
+                    <select id="entries" class="form-select form-select-sm" style="width: auto;" (change)="onPageSizeChange($event)">
+                        <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+                    </select>
+                    <span class="ms-2">entries</span>
+                </div>
+                <input type="text" class="form-control form-control-sm" placeholder="Search" [(ngModel)]="searchHousehold" (input)="onSearch()" style="width: 200px;">
+            </div>
+
+            <!-- Table for households -->
+            <table class="table table-striped display-table">
+                <thead>
+                    <tr>
+                        <th>
+                            Household Owner
+                            <span class="sorting-icons">
+                                <i class="bi bi-sort-up" (click)="sortBy('householdNo', 'asc')"></i>
+                                <i class="bi bi-sort-down" (click)="sortBy('householdNo', 'desc')"></i>
+                            </span>
+                        </th>
+                        <th>Household Number</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let household of displayedHouseholds">
+                        <td>{{ household.householdOwner }}</td>
+                        <td>{{ household.householdNo }}</td>
+                        <td>
+                            <div class="dropdown action-dropdown">
+                                <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown">
+                                    Action
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" routerLink="edit/{{household.householdId}}">Edit</a></li>
+                                    <li><button class="dropdown-item" (click)="deleteHousehold(household.householdId)">Delete</button></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-between">
+                <p>Showing {{ getStartIndex() }} to {{ getEndIndex() }} of {{ totalEntries }} entries</p>
+                <ul class="pagination">
+                    <li class="page-item" [class.disabled]="currentPage === 1">
+                        <a class="page-link" (click)="changePage(currentPage - 1)">Previous</a>
+                    </li>
+                    <li class="page-item" *ngFor="let page of [].constructor(getTotalPages()); let i = index" [class.active]="currentPage === i+1">
+                        <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+                    </li>
+                    <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
+                        <a class="page-link" (click)="changePage(currentPage + 1)">Next</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="p-4">
+    <div class="container" *ngFor="let brgy of barangay">
+        <!-- Row for Barangay Captain's Message and Image -->
+        <div class="row mb-4">
+            <div class="col-md-4 text-center d-flex align-items-center justify-content-center">
+                <img [src]="brgy.barangayCaptainImg" alt="{{ brgy.barangayName || 'Image not available' }}" class="img-fluid border border-secondary rounded" style="height: 100%; width: 100%" />
+            </div>
+            <div class="col-md-8">
+            <h2 class="text-uppercase text-black font-weight-medium" style="color: #EBE6E0">Message of Barangay Captain</h2>
+            <p class="text-black text-justify barangay-info" style="color: #EBE6E0">{{ brgy.barangayCaptainMessage }}</p>
+            <!-- Add more placeholder text as needed -->
+            </div>
+        </div>
+    
+        <!-- Row for Historical Background -->
+        <div class="row mb-4">  
+            <div class="col">
+            <h2 class="text-uppercase text-black font-weight-medium" style="color: #EBE6E0">Historical Background of Ermita</h2>
+            <p class="text-black text-justify barangay-info" style="color: #EBE6E0">{{ brgy.barangayHistoricalInfo }}</p>
+            <!-- Add more placeholder text as needed -->
+            </div>
+        </div>
+    
+        <!-- Row for Vision and Mission Side by Side -->
+        <div class="row">
+            <div class="col-md-6">
+            <h2 class="text-uppercase text-black font-weight-medium" style="color: #EBE6E0">Vision</h2>
+            <p class="text-black text-justify barangay-info" style="color: #EBE6E0">{{ brgy.barangayVision }}</p>
+            <!-- Add more placeholder text as needed -->
+            </div>
+            <div class="col-md-6">
+            <h2 class="text-uppercase text-black font-weight-meddium" style="color: #EBE6E0">Mission</h2>
+            <p class="text-black text-justify overflow-hidden barangay-info" style="color: #EBE6E0">{{ brgy.barangayMission }}</p>
+            <!-- Add more placeholder text as needed -->
+            </div>
+        </div>
+    </div>
+</div>

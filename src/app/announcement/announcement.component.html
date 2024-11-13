@@ -1,0 +1,24 @@
+<div class="p-4">
+    <div class="container">
+        <div class="announcement-section">
+            <div class="announcement-header">
+                <h1 class="title mb-3">ANNOUNCEMENTS</h1>
+            </div>
+            
+            <div class="announcement-container">
+                <div class="announcement-content" *ngFor="let announcement of announcements">
+                    <div class="card-announcement">
+                        <div class="card-body-announcement">
+                            <div class="image-placeholder">
+                                <img [src]="announcement.announcementImage" alt="{{ announcement.announcementTitle || 'Image not available' }}">
+                            </div>
+                            <h4 class="announcement-title">{{ announcement.announcementTitle }}</h4>
+                            <p class="announcement-details">{{ truncateDescription(announcement.announcementDescription, 150) }}</p>
+                            <a href="announcement-read/{{announcement.announcementId}}" class="btn read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

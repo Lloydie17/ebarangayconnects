@@ -1,0 +1,88 @@
+<h1 *ngIf="isAddMode">Add Services</h1>
+<h1 *ngIf="!isAddMode">Edit Services</h1>
+<div class="p-4">
+    <div class="container">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">  
+                <!-- Project Name -->
+                <div class="col-md-3 mb-3">
+                      <label for="projectName">Project Name</label>
+                      <input type="text" [ngClass]="{ 'is-invalid': submitted && f.projectName.errors }" formControlName="projectName" class="form-control" placeholder="Enter Project Name" />
+                      <div *ngIf="submitted && f.servicesName.errors" class="invalid-feedback">
+                          <div *ngIf="f.projectName.errors.required">Name of Project is required</div>
+                      </div>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label>Project Status</label>
+                    <select formControlName="projectStatus" class="select-class form-control custom-select-with-caret" [ngClass]="{ 'is-invalid': submitted && f.projectStatus.errors }">
+                        <option value="" disabled selected>Select Project Status</option>
+                        <option value="1">Cancelled</option>
+                        <option value="2">Pending Approval</option>
+                        <option value="3">Ongoing</option>
+                        <option value="4">Completed</option>
+                    </select>
+                    <div *ngIf="submitted && f.projectStatus.errors" class="invalid-feedback">
+                        <div *ngIf="f.projectStatus.errors.required">Status of Project is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <!-- Project Budget -->
+                <div class="col-md-3 mb-3">
+                    <label for="projectBudget">Project Budget</label>
+                    <input type="text" [ngClass]="{ 'is-invalid': submitted && f.projectBudget.errors }" formControlName="projectBudget" class="form-control" placeholder="Enter Project Budget" />
+                    <div *ngIf="submitted && f.projectBudget.errors" class="invalid-feedback">
+                        <div *ngIf="f.projectBudget.errors.required">Project Budget is required</div>
+                    </div>
+                </div>
+
+                <!-- Startdate -->
+                <div class="col-md-3 mb-3">
+                    <label for="startDate">Start Date</label>
+                    <input type="date" formControlName="startDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.startDate.errors }" />
+                    <div *ngIf="submitted && f.startDate.errors" class="invalid-feedback">
+                        <div *ngIf="f.startDate.errors.required">Start Date is required</div>
+                    </div>
+                </div>
+
+                <!-- Endate -->
+                <div class="col-md-3 mb-3">
+                    <label for="endDate">End Date</label>
+                    <input type="date" formControlName="endDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.endDate.errors }" />
+                    <div *ngIf="submitted && f.endDate.errors" class="invalid-feedback">
+                        <div *ngIf="f.endDate.errors.required">End Date is required</div>
+                    </div>
+                </div>
+
+                <!-- Project Description -->
+                <div class="col-md-6 mb-3">
+                    <label for="projectDescription">Project Description</label>
+                    <textarea type="text" [ngClass]="{ 'is-invalid': submitted && f.projectDescription.errors }" formControlName="projectDescription" class="form-control" placeholder="Enter Project Description" rows="3"></textarea>
+                    <div *ngIf="submitted && f.projectDescription.errors" class="invalid-feedback">
+                        <div *ngIf="f.projectDescription.errors.required">Description of Project is required</div>
+                    </div>
+                </div>
+                
+                <!-- Project Remarks -->
+                <div class="col-md-6 mb-3">
+                    <label for="projectRemarks">Project Remarks</label>
+                    <textarea type="text" formControlName="projectRemarks" class="form-control" placeholder="Enter Project Remarks" rows="3"></textarea>
+                </div>
+                
+            </div>
+  
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end">
+                <a routerLink="/admin/projects" class="btn btn-secondary me-2">Cancel</a>
+                <button [disabled]="loading" class="btn btn-success">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+  

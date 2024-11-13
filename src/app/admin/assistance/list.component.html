@@ -1,0 +1,86 @@
+<div class="display-section">
+    <div class="display-header">
+        <h3 class="mb-3 menu-title">Barangay Assistance</h3>
+    </div>
+
+    <div class="display-container">
+        <div class="display-card-content">
+            <div class="display-card-header d-flex justify-content-between align-items-center mb-3">
+                <p class="mb-0">List of Business Assistance</p>
+            </div>
+
+            <!-- Show entries and search -->
+            <div class="d-flex justify-content-between mb-3">
+                <div class="d-flex align-items-center">
+                    <label for="entries" class="me-2">Show</label>
+                    <select id="entries" class="form-select form-select-sm" style="width: auto;" (change)="onPageSizeChange($event)">
+                        <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+                    </select>
+                    <span class="ms-2">entries</span>
+                </div>
+                <input type="text" class="form-control form-control-sm" placeholder="Search" [(ngModel)]="searchRequest" (input)="onSearch()" style="width: 200px;">
+            </div>
+
+            <!-- Table for services -->
+            <table class="table table-striped display-table">
+                <thead>
+                    <tr>
+                        <th>
+                            Name
+                            <span class="sorting-icons">
+                                <i class="bi bi-sort-up" (click)="sortBy('requestName', 'asc')"></i>
+                                <i class="bi bi-sort-down" (click)="sortBy('requestName', 'desc')"></i>
+                            </span>
+                        </th>
+                        <th>Address</th>
+                        <th>Purpose</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let request of displayedRequest">
+                        <td>{{ request.requestName }}</td>
+                        <td>{{ request.requestAddress }}</td>
+                        <td>{{ request.requestPurpose }}</td>
+                        <td>{{ request.date | date: 'longDate' }}</td>
+                        <td>
+                            <span [ngClass]="getStatusClass(request.status)">
+                                {{ getStatusText(request.status) }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="dropdown action-dropdown">
+                                <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown">
+                                    Action
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><button class="dropdown-item" routerLink="view/{{request.requestId}}">View</button></li>
+                                    <li><button class="dropdown-item" (click)="updateStatus(request.requestId, 1)">Pending</button></li>
+                                    <li><button class="dropdown-item" (click)="updateStatus(request.requestId, 2)">In Progress</button></li>
+                                    <li><button class="dropdown-item" (click)="updateStatus(request.requestId, 3)">Resolved</button></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-between">
+                <p>Showing {{ getStartIndex() }} to {{ getEndIndex() }} of {{ totalEntries }} entries</p>
+                <ul class="pagination">
+                    <li class="page-item" [class.disabled]="currentPage === 1">
+                        <a class="page-link" (click)="changePage(currentPage - 1)">Previous</a>
+                    </li>
+                    <li class="page-item" *ngFor="let page of [].constructor(getTotalPages()); let i = index" [class.active]="currentPage === i+1">
+                        <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+                    </li>
+                    <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
+                        <a class="page-link" (click)="changePage(currentPage + 1)">Next</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

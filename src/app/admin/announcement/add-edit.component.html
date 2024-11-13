@@ -1,0 +1,55 @@
+<h1 *ngIf="isAddMode">Add Announcement</h1>
+<h1 *ngIf="!isAddMode">Edit Announcement</h1>
+<div class="p-4">
+    <div class="container">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <!-- Announcement Title -->
+                <div class="col-md-6 mb-3">
+                    <label for="announcementTitle">Title</label>
+                    <input
+                        type="text"
+                        formControlName="announcementTitle"
+                        class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.announcementTitle.errors }"
+                        placeholder="Enter Announcement Title"
+                    />
+                    <div *ngIf="submitted && f.announcementTitle.errors" class="invalid-feedback">
+                        <div *ngIf="f.announcementTitle.errors.required">Title is required</div>
+                    </div>
+                </div>
+
+                <!-- Announcement Description -->
+                <div class="col-md-12 mb-3">
+                    <label for="announcementDescription">Description</label>
+                    <textarea
+                        formControlName="announcementDescription"
+                        class="form-control"
+                        rows="4"
+                        placeholder="Enter Announcement Description"
+                    ></textarea>
+                </div>
+
+                <!-- Upload Announcement Images -->
+                <div class="col-md-12 mb-3">
+                    <label for="image">
+                        <input name="image" id="image" style="display:none;" type="file" (change)="onFileSelected($event)" class="form-control-file"/>
+                        <a class="btn btn-primary" style="color:#ffffff">Upload new image</a>
+                    </label>
+                    <div class="preview-images mt-2">
+                        <img class="img-account-profile rounded-circle mb-2" [src]="previewUrl || announcements.announcementImage"  alt="{{ announcements.announcementTitle }}">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end">
+                <a routerLink="/admin/announcements" class="btn btn-secondary me-2">Cancel</a>
+                <button [disabled]="loading" class="btn btn-success">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

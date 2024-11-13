@@ -1,0 +1,28 @@
+<h1 *ngIf="isAddMode">Add Category</h1>
+<h1 *ngIf="!isAddMode">Edit Category</h1>
+<div class="p-4">
+    <div class="container">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">  
+                <!-- Category Name -->
+                <div class="col-md-3 mb-3">
+                      <label for="category">Category Name</label>
+                      <input type="text" [ngClass]="{ 'is-invalid': submitted && f.category.errors }" formControlName="category" class="form-control" placeholder="Enter Category Name" />
+                      <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+                          <div *ngIf="f.category.errors.required">Name of Category is required</div>
+                      </div>
+                </div>
+            </div>
+  
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end">
+                <a routerLink="/admin/category" class="btn btn-secondary me-2">Cancel</a>
+                <button [disabled]="loading" class="btn btn-success">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+  

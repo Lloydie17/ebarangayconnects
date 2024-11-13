@@ -1,0 +1,142 @@
+<h1 *ngIf="isAddMode">Create Account</h1>
+<h1 *ngIf="!isAddMode">Edit Account</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-xl-4">
+            <div class="card mb-4 mb-xl-0">
+                <div class="card-header">Profile Picture</div>
+                <div class="card-body text-center">
+                    <img class="img-account-profile rounded-circle mb-2" [src]="previewUrl || account.profilePicture"  alt="{{ account.firstName }}">
+                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                    <label for="image">
+                        <input name="image" id="image" style="display:none;" type="file" (change)="onFileSelected($event)" class="form-control-file"/>
+                        <a class="btn btn-primary" style="color:#ffffff">Upload new image</a>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-8">
+            <div class="card mb-4">
+                <div class="card-header">
+                    Account Details
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="small mb-1" for="firstName">First name</label>
+                        <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" placeholder="Enter First name"/>
+                        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                            <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="small mb-1" for="middleName">Middle name</label>
+                        <input type="text" formControlName="middleName" class="form-control" placeholder="Enter Middle name"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="small mb-1" for="lastName">Last name</label>
+                        <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" placeholder="Enter Last name"/>
+                        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                        </div>
+                    </div>
+                    <div class="row gx-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="email">Email</label>
+                            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="Enter Email"/>
+                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                <div *ngIf="f.email.errors.required">Email is required</div>
+                                <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="contactNumber">Contact number</label>
+                            <input type="text" [ngClass]="{ 'is-invalid': submitted && f.contactNumber.errors }" formControlName="contactNumber" class="form-control" placeholder="Enter Contact number" />
+                            <div *ngIf="submitted && f.contactNumber.errors" class="invalid-feedback">
+                                <div *ngIf="f.contactNumber.errors.required">Contact Number is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row gx-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="title">Title</label>
+                            <select formControlName="title" class="select-class form-control custom-select-with-caret" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+                                <option value="Barangay Staff" selected>Barangay Staff</option>
+                                <option value="Barangay Treasurer">Barangay Treasurer</option>
+                                <option value="Barangay Secretary">Barangay Secretary</option>
+                                <option *ngIf="checkAccountRole()" value="Barangay Captain">Barangay Captain</option>
+                                <option *ngIf="checkAccountRole()" value="Barangay Councilor">Barangay Councilor</option>
+                            </select>
+                            <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                                <div *ngIf="f.title.errors.required">Title is required</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="role">Role</label>
+                            <select formControlName="role" class="select-class form-control custom-select-with-caret" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
+                                <option value="Staff">Barangay Staff</option>
+                                <option value="Admin">Barangay Admin</option>
+                            </select>
+                            <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+                                <div *ngIf="f.role.errors.required">Role is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row gx-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="gender">Gender</label>
+                            <select formControlName="gender" class="select-class form-control custom-select-with-caret" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                                <div *ngIf="f.gender.errors.required">Role is required</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="birthDate">Birthday</label>
+                            <input type="date" formControlName="birthDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.birthDate.errors }" />
+                            <div *ngIf="submitted && f.birthDate.errors" class="invalid-feedback">
+                                <div *ngIf="f.birthDate.errors.required">Birthdate is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="small mb-1" for="civilStatus">Civil status</label>
+                        <input type="text" formControlName="civilStatus" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.civilStatus.errors }" placeholder="Enter Civil status" />
+                            <div *ngIf="submitted && f.civilStatus.errors" class="invalid-feedback">
+                                <div *ngIf="f.civilStatus.errors.required">Civil status is required</div>
+                            </div>
+                    </div>
+                    <div class="row gx-3 mb-3">
+                        <h5 class="pt-3">Change Password</h5>
+                        <p class="small mb-1">Leave blank to keep the same password</p>
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="password">Password</label>
+                            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                <div *ngIf="f.password.errors.required">Password is required</div>
+                                <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="birthDate">Birthday</label>
+                            <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+                            <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                                <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                                <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" [disabled]="loading" class="btn btn-primary mr-2">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            Update
+                        </button>
+                        <a routerLink="/admin/accounts" href="" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

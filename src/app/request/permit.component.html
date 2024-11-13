@@ -1,0 +1,71 @@
+<div class="p-4">
+    <div class="container">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="card">
+                <div class="card-header request-header">
+                  {{ servicesName || 'Barangay Clearance' }}
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Full Name -->
+                        <div class="row-md-3 mb-3">
+                            <label for="requestName" class="req-text">Name of Proprietor/Manager</label>
+                            <input type="text" formControlName="requestName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.requestName.errors }" placeholder="Enter your Full Name." />
+                            <div *ngIf="submitted && f.requestName.errors" class="invalid-feedback">
+                                <div *ngIf="f.requestName.errors.required">Full Name is required</div>
+                            </div>
+                        </div>
+
+                        <!-- Business Name -->
+                        <div class="row-md-6 mb-3">
+                            <label for="businessName" class="req-text">Name of Business</label>
+                            <input type="text" [ngClass]="{ 'is-invalid': submitted && f.businessName.errors }" formControlName="businessName" class="form-control" placeholder="Enter your Purpose" />
+                            <div *ngIf="submitted && f.businessName.errors" class="invalid-feedback">
+                                <div *ngIf="f.businessName.errors.required">Name of Business is required</div>
+                            </div>
+                        </div>
+
+                        <!-- Business Nature -->
+                        <div class="row-md-6 mb-3">
+                            <label for="businessNature" class="req-text">Nature of Business</label>
+                            <input type="text" [ngClass]="{ 'is-invalid': submitted && f.businessNature.errors }" formControlName="businessNature" class="form-control" placeholder="Enter your Purpose" />
+                            <div *ngIf="submitted && f.businessNature.errors" class="invalid-feedback">
+                                <div *ngIf="f.businessNature.errors.required">Nature of Business is required</div>
+                            </div>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="row-md-3 mb-3">
+                            <label for="requestAddress" class="req-text">Address</label>
+                            <input type="text" formControlName="requestAddress" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.requestAddress.errors }" placeholder="Enter your Address" />
+                            <div *ngIf="submitted && f.requestAddress.errors" class="invalid-feedback">
+                                <div *ngIf="f.requestAddress.errors.required">Address is required</div>
+                            </div>
+                        </div>
+
+                        <!-- Services Fee -->
+                        <div class="d-flex justify-content-end mb-4">
+                            <div class="col-md-3 mb-3">
+                                <label for="servicesFee" class="req-text">Amount to be paid</label>
+                                <input type="text" value="{{ servicesFee }}" formControlName="servicesFee" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.servicesFee.errors }" placeholder="₱ 00.00" disabled/>
+                                <div *ngIf="submitted && f.servicesFee.errors" class="invalid-feedback">
+                                    <div *ngIf="f.servicesFee.errors.required">Services Fee is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex justify-content-end">
+                            <a routerLink="/" class="btn btn-secondary me-2">Cancel</a>
+                            <button [disabled]="loading" class="btn req-button">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+              </div>
+        </form>>
+    </div>
+</div>
+  

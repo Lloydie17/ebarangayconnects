@@ -1,0 +1,46 @@
+<div class="p-4">
+    <div class="container">
+        <div class="welcome-section row align-items-start" *ngFor="let brgy of barangay">
+            <div class="col-auto">
+                <img class="ermitalogo" [src]="brgy.barangayLogo" alt="Ermita Logo">
+            </div>
+            <div class="col welcome-text">
+                <p class="brgyname mb-0 ">WELCOME TO</p>
+                <p class="brgyname mb-0 text-uppercase">{{ brgy.barangayName }}</p>
+                <p class="brgyinfo mb-0">{{ brgy.barangayHallAddress }}</p>
+                <p class="brgyinfo mb-0">Open Hours of Barangay: Monday to Friday (8AM - 5PM)</p>
+                <p class="brgyinfo mb-0">{{ brgy.barangayContactNum }}</p>
+                <a routerLink="/about" class="btn-about">ABOUT US</a>
+                <a routerLink="/register" class="btn-register">REGISTER RESIDENT</a>
+            </div>
+        </div>
+
+        <div class="services-section" id="services">
+            <div class="services-header">
+                <h1 class="title mb-3">SERVICES</h1>
+                <p class="info">ONLINE DOCUMENTS OFFERED</p>
+            </div>
+            
+            <div class="services-container">
+                <div class="services-content" *ngFor="let service of services">
+                    <div class="card2">
+                        <div class="card-body-2">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/ebarangayconnect-cbd22.appspot.com/o/Form.svg?alt=media&token=95322df1-bbda-4b88-8591-1a9644169638" alt="Form">
+                            <h2>{{ service.servicesName }}</h2>
+                            <p>{{ service.servicesDetails }}</p>
+                            <button type="button" (click)="proceedToRequest(service)">PROCEED</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-section" id="map">
+                    <div id="map-container" class="map-container">
+                        <div id="map" style="height: 400px; width: 100%;"></div>
+                        <button class="geolocate-button" (click)="getUserLocation()"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  

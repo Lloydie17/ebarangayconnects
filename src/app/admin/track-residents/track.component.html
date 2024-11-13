@@ -1,0 +1,25 @@
+<div class="display-section">
+    <div class="display-header">
+        <h3 class="menu-title">Tracking Resident</h3>
+    </div>
+
+    <div class="p-4">
+        <div class="container">
+            <div class="card map-card">
+                <div class="card-header">
+                    <label>Enter Resident's Name</label> <br>
+                    <input type="text" [(ngModel)]="residentName">
+                    <button class="btn btn-search ml-2" (click)="searchResident()">Search</button>
+                </div>
+                <div class="card-body p-4">
+                    <div class="map-section">
+                        <div id="map-container" class="map-container">
+                            <div id="map" style="height: 400px; width: 100%;"></div>
+                            <button class="geolocate-button" (click)="getUserLocation()"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

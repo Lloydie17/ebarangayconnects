@@ -1,0 +1,40 @@
+<div class="notification-wrapper" (click)="toggleNotificationDropdown()">
+    <img src="https://firebasestorage.googleapis.com/v0/b/ebarangayconnect-cbd22.appspot.com/o/notification.svg?alt=media&token=b3ff34d1-6fea-486a-9fed-a40641c643b8" alt="notification" width="25">
+  
+    <!-- Notification Dropdown -->
+    <div *ngIf="showNotificationDropdown" class="notification-dropdown">
+      <div class="dropdown-header">
+        <h1>Notifications</h1>
+      </div>
+
+      <div class="notification-container">
+        <ul class="notification-list">
+          <li *ngIf="newNotifications.length === 0 && earlierNotifications.length === 0" class="no-notification">
+            <p>No notifications available.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div *ngIf="newNotifications.length > 0" class="notification-container">
+        <h6 class="notification-info">New</h6>
+        <ul class="notification-list">
+          <li *ngFor="let notification of newNotifications" class="notification-item" (click)="viewNotification(notification)">
+            <a *ngIf="notification.message.includes('pending')"><b>{{ notification.name }} </b> {{ notification.message }} <i [ngClass]="getServiceTypeClass(notification)">{{ getServiceName(notification) }}</i></a>
+            <a *ngIf="notification.message.includes('processed')"><b>{{ notification.name }} </b> <i>{{ getServiceName(notification) }}</i> {{ notification.message }}</a>
+            <p class="timestamp">{{ formatTimestamp(notification.createdAt) }}</p>
+          </li>
+        </ul>
+      </div>
+
+      <div *ngIf="earlierNotifications.length > 0">
+        <h6 class="notification-info">Earlier</h6>
+        <ul class="notification-list">
+          <li *ngFor="let notification of earlierNotifications" class="notification-item" (click)="viewNotification(notification)">
+            <a *ngIf="notification.message.includes('pending')"><b>{{ notification.name }} </b> {{ notification.message }} <i>{{ getServiceName(notification) }}</i></a>
+            <a *ngIf="notification.message.includes('processed')"><b>{{ notification.name }} </b> <i>{{ getServiceName(notification) }}</i> {{ notification.message }}</a>
+            <p class="timestamp">{{ formatTimestamp(notification.createdAt) }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+</div>

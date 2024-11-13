@@ -1,0 +1,93 @@
+<h1>Barangay Information</h1>
+<form [formGroup]="form">
+    <div class="card mb-4 mb-xl-0">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            Barangay Information
+            <a routerLink="edit/{{ barangay.barangayId}}" class="btn btn-display btn-sm me-2">Edit Barangay Info</a>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-4">
+                <div class="mb-4 mb-xl-0">
+                    <div class="card-body text-center">
+                        <div class="d-flex justify-content-between align-items-center ml-3 mb-3">
+                            <h5 class="mb-0">Barangay Captain</h5>
+                        </div>
+                        <img class="img-account-profile mb-3 border border-dark" [src]="barangay.barangayCaptainImg"  alt="{{ barangay.barangayCaptain }}">
+
+                        <div class="d-flex justify-content-between align-items-center ml-3 mb-3">
+                            <h5 class="mb-0">Barangay Logo</h5>
+                        </div>
+                        <img class="img-account-profile mb-2 border border-dark" [src]="barangay.barangayLogo"  alt="{{ barangay.barangayName }}">
+
+                        <div class="ml-3 mb-3 mt-4">
+                            <div class="mb-3">
+                                <label class="medium mb-1 d-flex" for="barangayVision">Vision</label>
+                                <textarea type="text" formControlName="barangayVision" class="form-control" rows="10" readonly></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="medium mb-1 d-flex" for="barangayMission">Mission</label>
+                                <textarea type="text" formControlName="barangayMission" class="form-control" rows="10" readonly></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-xl-8">
+                <div class="mb-4">
+                    <div class="card-body">
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="medium mb-1" for="barangayCaptain">Barangay Captain Name</label>
+                                <input type="text" formControlName="barangayCaptain" class="form-control" placeholder="Enter Barangay Captain Name" readonly/>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="medium mb-1" for="barangayName">Barangay Name</label>
+                                <input type="text" formControlName="barangayName" class="form-control" placeholder="Enter Barangay Name" readonly/>
+                            </div>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="medium mb-1" for="barangayHallAddress">Barangay Hall Address</label>
+                                <input type="text" formControlName="barangayHallAddress" class="form-control" placeholder="Enter Barangay Hall Address" readonly/>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="medium mb-1" for="barangayContactNum">Barangay Contact number</label>
+                                <input type="text" formControlName="barangayContactNum" class="form-control" placeholder="Enter Barangay Contact number" readonly/>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="medium mb-1" for="barangayCaptainMessage">Message of Barangay Captain</label>
+                            <textarea type="text" formControlName="barangayCaptainMessage" class="form-control" rows="7" readonly></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="medium mb-1" for="barangayHistoricalInfo">Historical Background</label>
+                            <textarea type="text" formControlName="barangayHistoricalInfo" class="form-control" rows="7" readonly></textarea>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="medium mb-1" for="barangayLat">Latitude</label>
+                                <input type="text" formControlName="barangayLat" class="form-control" readonly/>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="medium mb-1" for="barangayLong">Longitude</label>
+                                <input type="text" formControlName="barangayLong" class="form-control" readonly/>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="map-section border border-dark">
+                              <div id="map-container" class="map-container">
+                                  <div id="map" style="height: 400px; width: 100%;"></div>
+                                  <button class="geolocate-button" type="button" (click)="getUserLocation()"></button>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

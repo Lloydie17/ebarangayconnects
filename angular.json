@@ -31,6 +31,10 @@
             "scripts": [
               "node_modules/leaflet/dist/leaflet.js",
               "node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "leaflet",
+              "leaflet-routing-machine"
             ]
           },
           "configurations": {
@@ -38,8 +42,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",

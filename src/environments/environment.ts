@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'https://ebarangayconnect-server.onrender.com/'
+    apiUrl: 'https://ebarangayconnect-server.onrender.com'
   };
   
   /*

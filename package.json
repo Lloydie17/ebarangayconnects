@@ -4,7 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
+<<<<<<< HEAD
     "build": "npm ci --legacy-peer-deps && npm run build",
+=======
+    "build": {
+      "command": "npm install --force --legacy-peer-deps && npm run build"
+    },
+>>>>>>> c83eda39b07924984d9db620f90ce86a6d340ec8
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

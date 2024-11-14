@@ -119,7 +119,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label class="small mb-1" for="birthDate">Birthday</label>
+                            <label class="small mb-1" for="birthDate">Confirm Password</label>
                             <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
                             <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
                                 <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>

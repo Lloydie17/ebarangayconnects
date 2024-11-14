@@ -54,7 +54,7 @@
                         <td style="white-space: nowrap">
                             <!-- Check if the account is verified -->
                             <span *ngIf="accounts.isVerified" class="verified-label">Verified</span>
-                            <a *ngIf="!accounts.isVerified" class="btn btn-sm btn-primary mr-1" style="color: white;" (click)="sendEmail(account.id)">Send Email</a>
+                            <a *ngIf="!accounts.isVerified" class="btn btn-sm btn-primary mr-1" style="color: white;" (click)="sendEmail(accounts.id)">Send Email</a>
                         </td>
                     </tr>
                 </tbody>

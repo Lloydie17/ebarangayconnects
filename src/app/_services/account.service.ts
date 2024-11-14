@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, finalize } from 'rxjs/operators';
+import { map, finalize, catchError } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 import { Account } from '@app/_models';
@@ -48,7 +48,12 @@ export class AccountService {
                 this.accountSubject.next(account);
                 this.startRefreshTokenTimer();
                 return account;
-            }));
+            }),
+            catchError(error => {
+                console.error('Error during token refresh', error);
+                throw error;
+            })
+        );
     }
 
     sendEmail(id: string) {

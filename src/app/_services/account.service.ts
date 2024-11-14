@@ -43,6 +43,13 @@ export class AccountService {
     }
 
     refreshToken() {
+        const refreshToken = this.getCookie('refreshToken');
+
+        if (!refreshToken) {
+            console.error('No refresh token available');
+            return;
+        }
+
         return this.http.post<any>(`${baseUrl}/refresh-token`, {}, { withCredentials: true })
             .pipe(map((account) => {
                 this.accountSubject.next(account);
@@ -144,4 +151,10 @@ export class AccountService {
     private stopRefreshTokenTimer() {
         clearTimeout(this.refreshTokenTimeout);
     }
+
+    // Helper method to retrieve a specific cookie by name
+    private getCookie(name: string): string | null {
+        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        return match ? match[2] : null;
+}
 }

@@ -90,7 +90,7 @@ export class DashboardComponent implements OnInit {
 
     getTotalProjects() {
         this.projectService.getAll().subscribe(projects => {
-            this.totalProjects = projects.filter(project => project.projectStatus === '3' || project.projectStatus === '4').length;
+            this.totalProjects = projects.filter(project => project.projectStatus === 3 || project.projectStatus === 4).length;
         },
         error => {
             this.totalProjects = 0;

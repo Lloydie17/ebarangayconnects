@@ -141,28 +141,43 @@ export class TrackComponent implements OnInit {
     }
 
     searchResident() {
-        this.residentService.getResidentLocation(this.residentName)
-            .subscribe((data: any) => {
-                console.log("Response from API:", data); 
-                this.residentLocation = data;
-                this.displayedResidentName = this.residentLocation.fullName;
-                this.showResidentName = true;
-                this.updateMap(this.residentLocation.latitude, this.residentLocation.longitude, this.residentLocation.fullName);
-                this.residentLoc = this.residentLocation.latitude, this.residentLocation.longitude, this.residentLocation.fullName;
-                
-                // Call getRouteToLocation using user's current location and resident's location
-                if (this.currentUserLatLng) {
-                    this.getRouteToLocation(this.currentUserLatLng.lat, this.currentUserLatLng.lng, this.residentLocation.latitude, this.residentLocation.longitude);
-                } else {
-                    this.marker
-                    this.getRouteToLocation(this.initialLatLng.lat, this.initialLatLng.lng, this.residentLocation.latitude, this.residentLocation.longitude);
-                }
-
-            }, error => {
-                console.log(error);
+        // First filter the residents based on status (only approved ones)
+        this.residentService.getAll().subscribe((residents: any[]) => {
+            const approvedResidents = residents.filter(resident => resident.status && resident.dump);
+            
+            // Now check if the residentName exists in the approved residents list
+            const resident = approvedResidents.find(r => r.fullName.toLowerCase() === this.residentName.toLowerCase());
+    
+            if (resident) {
+                this.residentService.getResidentLocation(resident.fullName)
+                    .subscribe((data: any) => {
+                        console.log("Response from API:", data); 
+                        this.residentLocation = data;
+                        this.displayedResidentName = this.residentLocation.fullName;
+                        this.showResidentName = true;
+                        this.updateMap(this.residentLocation.latitude, this.residentLocation.longitude, this.residentLocation.fullName);
+                        this.residentLoc = this.residentLocation.latitude, this.residentLocation.longitude, this.residentLocation.fullName;
+                        
+                        // Call getRouteToLocation using user's current location and resident's location
+                        if (this.currentUserLatLng) {
+                            this.getRouteToLocation(this.currentUserLatLng.lat, this.currentUserLatLng.lng, this.residentLocation.latitude, this.residentLocation.longitude);
+                        } else {
+                            this.getRouteToLocation(this.initialLatLng.lat, this.initialLatLng.lng, this.residentLocation.latitude, this.residentLocation.longitude);
+                        }
+                    }, error => {
+                        console.log(error);
+                        this.showResidentName = false;
+                    });
+            } else {
+                console.log('Resident not found or not approved');
                 this.showResidentName = false;
-            });
+            }
+        }, error => {
+            console.log('Error fetching residents:', error);
+            this.showResidentName = false;
+        });
     }
+    
 
     updateMap(latitude: number, longitude: number, fullName: string) {
         console.log("Latitude:", latitude);

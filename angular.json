@@ -35,7 +35,8 @@
             ],
             "allowedCommonJsDependencies": [
               "leaflet",
-              "leaflet-routing-machine"
+              "leaflet-routing-machine",
+              "file-saver"
             ]
           },
           "configurations": {

@@ -9,7 +9,8 @@
                 <p class="mb-0">Residents Record</p>
                 <div class="button-group">
                     <a routerLink="add" class="btn btn-display btn-sm me-2">Add Resident</a>
-                    <button class="btn btn-dark btn-sm">Export CSV</button>
+                    <button class="btn btn-primary btn-sm me-2" (click)="openEmailModal()">Send Email</button>
+                    <button class="btn btn-dark btn-sm" (click)="exportToCSV()">Export CSV</button>
                 </div>
             </div>
 
@@ -81,6 +82,55 @@
                         <a class="page-link" (click)="changePage(currentPage + 1)">Next</a>
                     </li>
                 </ul>
+            </div>
+
+            <!-- Email Blast Modal -->
+            <div class="modal fade" id="emailBlastModal" tabindex="-1" aria-labelledby="emailBlastModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="emailBlastModalLabel">Send Email to Sitio Residents</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+                                <!-- Sitio -->
+                                <div class="mb-3">
+                                    <label for="sitioId" class="form-label">Sitio</label>
+                                    <select formControlName="sitioId" class="select-class form-control custom-select-with-caret" [ngClass]="{ 'is-invalid': submitted && f.sitioId.errors }">
+                                        <option value="" disabled>Select Sitio</option>
+                                        <option *ngFor="let sitio of sitios" [value]="sitio.sitioId">{{ sitio.sitioName }}</option>
+                                    </select>
+                                    <div *ngIf="submitted && f.sitioId.errors" class="invalid-feedback">
+                                        <div *ngIf="f.sitioId.errors.required">Sitio is required</div>
+                                    </div>
+                                </div>
+
+                                <!-- Subject -->
+                                <div class="mb-3">
+                                    <label for="emailSubject" class="form-label">Subject</label>
+                                    <input type="text" id="emailSubject" formControlName="subject" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.subject.errors }">
+                                    <div *ngIf="submitted && f.subject.errors" class="invalid-feedback">
+                                        <div *ngIf="f.subject.errors.required">Subject is required</div>
+                                    </div>
+                                </div>
+
+                                <!-- Message -->
+                                <div class="mb-3">
+                                    <label for="emailMessage" class="form-label">Message</label>
+                                    <textarea id="emailMessage" formControlName="message" class="form-control" rows="5" [ngClass]="{ 'is-invalid': submitted && f.message.errors }"></textarea>
+                                    <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
+                                        <div *ngIf="f.message.errors.required">Message is required</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" (click)="onSubmit()">Send Email</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

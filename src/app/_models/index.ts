@@ -2,7 +2,6 @@ export * from './account';
 export * from './resident';
 export * from './alert';
 export * from './role';
-export * from './residentRecord';
 export * from './household';
 export * from './category';
 export * from './barangay';

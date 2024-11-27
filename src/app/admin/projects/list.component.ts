@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { filter, first } from 'rxjs/operators';
 import { ProjectService, AccountService, AlertService } from '@app/_services';
 import { Project } from '@app/_models';
+import { saveAs } from 'file-saver';
 
 @Component({ templateUrl: 'list.component.html' })
 export class ListComponent implements OnInit {
@@ -180,5 +181,33 @@ export class ListComponent implements OnInit {
             return description.substring(0, maxLength) + '...';
         }
         return description;
+    }
+
+    exportToCSV() {
+        const completedProjects = this.projects.filter(project => project.projectStatus === 4);
+
+        // Prepare the header
+        const header = ['Fullname', 'Project Name', 'Project Description', 'Project Remarks', 'Budget', 'Start Date', 'End Date', 'Status'];
+    
+        // Prepare the rows
+        const rows = completedProjects.map(project => {
+            const fullName = this.getName(project.accountId);
+            const projectName = project.projectName;
+            const projectDescription = project.projectDescription;
+            const projectRemarks = project.projectRemarks;
+            const budget = project.projectBudget;
+            const startDate = project.startDate;
+            const endDate = project.endDate;
+            const status = this.getStatusText(project.projectStatus);
+    
+            return [fullName, projectName, projectDescription, projectRemarks, budget, startDate, endDate, status];
+        });
+    
+        // Combine header and rows into CSV content
+        const csvContent = [header, ...rows].map(row => row.join(',')).join('\n');
+    
+        // Create a Blob and trigger the download
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        saveAs(blob, 'projects.csv');
     }
 }

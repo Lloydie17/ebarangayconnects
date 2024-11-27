@@ -42,6 +42,7 @@ export class AddEditComponent implements OnInit {
             birthDate: [this.account.birthDate, Validators.required],
             contactNumber: [this.account.contactNumber, [Validators.required, Validators.pattern('^[0-9]{11}$')]],
             role: [this.account.role, Validators.required],
+            isActive: [this.account.isActive, Validators.required],
             password: ['', [Validators.minLength(6)]],
             confirmPassword: [''],
             profilePicture: ['']
@@ -127,6 +128,7 @@ export class AddEditComponent implements OnInit {
         formData.append('lastName', this.form.get('lastName')?.value);
         formData.append('email', this.form.get('email')?.value);
         formData.append('role', this.form.get('role')?.value);
+        formData.append('isActive', this.form.get('isActive')?.value);
         formData.append('gender', this.form.get('gender')?.value);
         formData.append('civilStatus', this.form.get('civilStatus')?.value);
         formData.append('birthDate', this.form.get('birthDate')?.value);

@@ -18,58 +18,6 @@
                         <div class="dashboard-card-footer">Total Population</div>
                     </div>
                 </div>
-                <div class="gender-card">
-                    <div class="gender-card-body">
-                        <div class="gender-card-header">
-                            <img src="../../assets/icons/male.svg" alt="Form">
-                            <h3>MALE</h3>
-                        </div>
-                        <div class="dashboard-info">
-                            <p class="total-number">{{ totalMale }}</p>
-                            <hr>
-                            <div class="dashboard-card-footer">Total Male</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="gender-card">
-                    <div class="gender-card-body">
-                        <div class="gender-card-header">
-                            <img src="../../assets/icons/female.svg" alt="Form">
-                            <h3>FEMALE</h3>
-                        </div>
-                        <div class="dashboard-info">
-                            <p class="total-number">{{ totalFemale }}</p>
-                            <hr>
-                            <div class="dashboard-card-footer">Total Female</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="voters-card">
-                    <div class="voters-card-body">
-                        <div class="voters-card-header">
-                            <img src="../../assets/icons/fingerprint.svg" alt="Form">
-                            <h3>VOTERS</h3>
-                        </div>
-                        <div class="dashboard-info">
-                            <p class="total-number">{{ totalVoters }}</p>
-                            <hr>
-                            <div class="dashboard-card-footer">Total Voters</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="voters-card">
-                    <div class="voters-card-body">
-                        <div class="voters-card-header">
-                            <img src="../../assets/icons/fingerprint.svg" alt="Form">
-                            <h3>NON-VOTERS</h3>
-                        </div>
-                        <div class="dashboard-info">
-                            <p class="total-number">{{ totalNonVoters }}</p>
-                            <hr>
-                            <div class="dashboard-card-footer">Total Non-Voters</div>
-                        </div>
-                    </div>
-                </div>
                 <div class="project-card">
                     <div class="project-card-body">
                         <div class="project-card-header">
@@ -80,19 +28,6 @@
                             <p class="total-number">{{ totalProjects }}</p>
                             <hr>
                             <div class="dashboard-card-footer">Total Project</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="sitio-card">
-                    <div class="sitio-card-body">
-                        <div class="sitio-card-header">
-                            <img src="../../assets/icons/sitio.svg" alt="Form">
-                            <h3>SITIO</h3>
-                        </div>
-                        <div class="dashboard-info">
-                            <p class="total-number">{{ totalSitio }}</p>
-                            <hr>
-                            <div class="dashboard-card-footer">Total Sitio</div>
                         </div>
                     </div>
                 </div>
@@ -109,8 +44,42 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="chart-card">
+                    <div class="chart-card-body">
+                        <h3 class="chart-header">GENDER DISTRIBUTION</h3>
+                        <canvas id="genderChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-card-body">
+                        <h3 class="chart-header">VOTERS AND NON-VOTERS</h3>
+                        <canvas id="voterChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-card-body">
+                        <h3 class="chart-header">CATEGORY DISTRIBUTION</h3>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="barchart-card">
+                    <div class="barchart-card-body">
+                        <h3 class="barchart-header">MONTHLY TOTAL REVENUE</h3>
+                        <canvas id="monthlyRevenueChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="barchart-card">
+                    <div class="barchart-card-body">
+                        <h3 class="barchart-header">DOCUMENTS REQUESTS SUMMARY</h3>
+                        <canvas id="documentRequestsChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-  

@@ -90,7 +90,7 @@
                                 <option value="Female">Female</option>
                             </select>
                             <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
-                                <div *ngIf="f.gender.errors.required">Role is required</div>
+                                <div *ngIf="f.gender.errors.required">Gender is required</div>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -101,16 +101,32 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label class="small mb-1" for="civilStatus">Civil status</label>
-                        <input type="text" formControlName="civilStatus" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.civilStatus.errors }" placeholder="Enter Civil status" />
-                            <div *ngIf="submitted && f.civilStatus.errors" class="invalid-feedback">
-                                <div *ngIf="f.civilStatus.errors.required">Civil status is required</div>
+                    <div class="row gx-3 mb-3">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="small mb-1" for="civilStatus">Civil status</label>
+                                <input type="text" formControlName="civilStatus" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.civilStatus.errors }" placeholder="Enter Civil status" />
+                                    <div *ngIf="submitted && f.civilStatus.errors" class="invalid-feedback">
+                                        <div *ngIf="f.civilStatus.errors.required">Civil status is required</div>
+                                    </div>
                             </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="isActive">Status</label>
+                            <select formControlName="isActive" class="select-class form-control custom-select-with-caret" [(ngModel)]="form.value.isActive" [ngClass]="{ 'is-invalid': submitted && f.isActive.errors }">
+                                <option [ngValue]="true">Enabled</option>
+                                <option [ngValue]="false">Disabled</option>
+                            </select>
+                            <div *ngIf="submitted && f.isActive.errors" class="invalid-feedback">
+                                <div *ngIf="f.isActive.errors.required">Status is required</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row gx-3 mb-3">
-                        <h5 class="pt-3">Change Password</h5>
-                        <p class="small mb-1">Leave blank to keep the same password</p>
+                        <div *ngIf="!isAddMode">
+                            <h5 class="pt-3">Change Password</h5>
+                            <p class="small mb-1">Leave blank to keep the same password</p>
+                        </div>
                         <div class="col-md-6">
                             <label class="small mb-1" for="password">Password</label>
                             <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
@@ -129,9 +145,13 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" [disabled]="loading" class="btn btn-primary mr-2">
+                        <button *ngIf="!isAddMode" type="submit" [disabled]="loading" class="btn btn-primary mr-2">
                             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                             Update
+                        </button>
+                        <button *ngIf="isAddMode" type="submit" [disabled]="loading" class="btn btn-primary mr-2">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            Create
                         </button>
                         <a routerLink="/admin/accounts" href="" class="btn btn-secondary">Cancel</a>
                     </div>

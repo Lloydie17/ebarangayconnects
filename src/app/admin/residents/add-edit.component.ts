@@ -19,6 +19,8 @@ export class AddEditComponent implements OnInit {
     categories: any = {};
     sitios: any = {};
     previewUrl: string | ArrayBuffer | null = null;
+    isModalOpen: boolean = false;
+    selectedImage: string | null = null;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -237,5 +239,17 @@ export class AddEditComponent implements OnInit {
                     this.loading = false;
                 }
             });
+    }
+
+    // Function to open the modal and display the selected image
+    viewImage(imageUrl: string) {
+        this.selectedImage = imageUrl;
+        this.isModalOpen = true;
+    }
+
+    // Function to close the modal
+    closeImageModal() {
+        this.isModalOpen = false;
+        this.selectedImage = null;
     }
 }

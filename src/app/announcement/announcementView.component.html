@@ -11,6 +11,17 @@
                     </blockquote>
                 </div>
             </div>
+
+            <!-- Navigation -->
+            <div class="navigation d-flex justify-content-between align-items-center">
+                <a *ngIf="previousAnnouncement" class="prev-post" (click)="goToAnnouncement(previousAnnouncement.announcementId)">
+                    ← Previous Post
+                </a>
+                <span *ngIf="!previousAnnouncement"></span>
+                <a *ngIf="nextAnnouncement" class="next-post" (click)="goToAnnouncement(nextAnnouncement.announcementId)">
+                    Next Post →
+                </a>
+            </div>
         </main>
     </div>
 </div>

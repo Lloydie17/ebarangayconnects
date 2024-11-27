@@ -16,6 +16,7 @@ export class NotificationComponent implements OnInit {
     earlierNotifications: any[] = [];
     pendingNotifications: any[] = [];
     processedNotifications: any[] = [];
+    newNotificationCount: number = 0;
 
     constructor(
         private notificationService: NotificationService,
@@ -82,6 +83,8 @@ export class NotificationComponent implements OnInit {
             const notificationDate = new Date(notification.createdAt);
             return notification.seen || (now.getTime() - notificationDate.getTime() >= oneDayInMillis);
         });
+
+        this.newNotificationCount = this.notifications.length;
     }
 
     formatTimestamp(createdAt: string): string {

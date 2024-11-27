@@ -30,6 +30,25 @@ export class ResidentService {
         return this.http.get<Resident[]>(baseUrl)
     }
 
+    getResidentsGroupedByCategory() {
+        return this.http.get<Resident[]>(baseUrl).pipe(
+            map((residents) => {
+                const categoryCounts: { [key: string]: number } = {};
+                residents.forEach((resident) => {
+                    if (resident.dump) {
+                        categoryCounts[resident.categoryId] = (categoryCounts[resident.categoryId] || 0) + 1;
+                    }
+                });
+                return categoryCounts;
+            })
+        );
+    }
+
+    sendBlastEmail(sitioId: string, emailData: { subject: string; message: string }): Observable<any> {
+        return this.http.post(`${baseUrl}/blast-email/${sitioId}`, emailData);
+    }
+    
+
     getById(id: string) {
         return this.http.get<Resident>(`${baseUrl}/${id}`);
     }

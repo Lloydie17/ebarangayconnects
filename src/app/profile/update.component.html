@@ -71,13 +71,13 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label class="small mb-1" for="role">Role</label>
-                            <select formControlName="role" class="select-class form-control custom-select-with-caret" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
-                                <option value="Staff">Barangay Staff</option>
-                                <option value="Admin">Barangay Admin</option>
+                            <label class="small mb-1" for="isActive">Status</label>
+                            <select formControlName="isActive" class="select-class form-control custom-select-with-caret" [(ngModel)]="form.value.isActive" [ngClass]="{ 'is-invalid': submitted && f.isActive.errors }">
+                                <option [ngValue]="true">Enabled</option>
+                                <option [ngValue]="false">Disabled</option>
                             </select>
-                            <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
-                                <div *ngIf="f.role.errors.required">Role is required</div>
+                            <div *ngIf="submitted && f.isActive.errors" class="invalid-feedback">
+                                <div *ngIf="f.isActive.errors.required">Status is required</div>
                             </div>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                                 <option value="Female">Female</option>
                             </select>
                             <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
-                                <div *ngIf="f.gender.errors.required">Role is required</div>
+                                <div *ngIf="f.gender.errors.required">Gender is required</div>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -103,9 +103,9 @@
                     <div class="mb-3">
                         <label class="small mb-1" for="civilStatus">Civil status</label>
                         <input type="text" formControlName="civilStatus" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.civilStatus.errors }" placeholder="Enter Civil status" />
-                            <div *ngIf="submitted && f.civilStatus.errors" class="invalid-feedback">
-                                <div *ngIf="f.civilStatus.errors.required">Civil status is required</div>
-                            </div>
+                        <div *ngIf="submitted && f.civilStatus.errors" class="invalid-feedback">
+                            <div *ngIf="f.civilStatus.errors.required">Civil status is required</div>
+                        </div>                        
                     </div>
                     <div class="row gx-3 mb-3">
                         <h5 class="pt-3">Change Password</h5>

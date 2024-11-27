@@ -45,7 +45,7 @@ export class ListComponent implements OnInit {
                         this.requestService.getAll()
                             .pipe(first())
                             .subscribe(request => {
-                                this.request = request;
+                                this.request = request.filter(request => request.status === 3);
                                 this.totalEntries = this.request.length;
                                 this.updateDisplayedRequest();
                         });
@@ -59,22 +59,79 @@ export class ListComponent implements OnInit {
             });
     }
 
-    updateDisplayedRequest() {
-        let filteredRequest = this.request.filter(request => {
-            const requestDetail = this.requestDetails.find(rd => rd.requestId === request.requestId);
-
-            if (requestDetail) {
-                const service = this.services.find(s => s.servicesId === +requestDetail.servicesId);
-
-                return service !== undefined;
-            }
-            return false;
+    exportToCSV() {
+        const headers = ['Date', 'Recipient', 'Details', 'Amount', 'Processed By'];
+    
+        // Filter requests by status and date range
+        const filteredRequests = this.request
+            .filter(request => request.status === 3)
+            .filter(request => {
+                const requestDate = new Date(request.date);
+                const minDate = this.minDate ? new Date(this.minDate) : null;
+                const maxDate = this.maxDate ? new Date(this.maxDate) : null;
+    
+                // Apply minimum and maximum date filters
+                return (!minDate || requestDate >= minDate) && (!maxDate || requestDate <= maxDate);
+            });
+    
+        const rows = filteredRequests.map(request => {
+            const date = new Date(request.date).toLocaleDateString();
+            const recipient = request.requestName;
+            const details = this.getServiceName(request.requestId);
+            const amount = this.getServiceFee(request.requestId);
+            const processedBy = this.getAccountName(request.accountId);
+    
+            return [date, recipient, details, amount, processedBy];
         });
+    
+        const csvContent = [
+            headers.join(','),
+            ...rows.map(row => row.join(','))
+        ].join('\n');
+    
+        const blob = new Blob([csvContent], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+    
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'revenues.csv';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }
+    
 
-        // Apply search filter on the request name
-        filteredRequest = filteredRequest.filter(request =>
-            request.requestName.toLowerCase().includes(this.searchRequest.toLowerCase())
-        );
+    updateDisplayedRequest() {
+        let filteredRequest = this.request;
+
+        // If there is a search term, apply filtering
+        if (this.searchRequest) {
+            filteredRequest = filteredRequest.filter(request => {
+                const requestDetail = this.requestDetails.find(rd => rd.requestId === request.requestId);
+
+                if (requestDetail) {
+                    const service = this.services.find(s => s.servicesId === +requestDetail.servicesId);
+                    
+                    if (service) {
+                        const serviceName = service.servicesName.toLowerCase();
+                        const serviceFee = service.servicesFee.toString().toLowerCase();
+                        const accountName = this.getAccountName(request.accountId).toLowerCase();
+
+                        const matchesRequestFields =
+                            request.requestName.toLowerCase().includes(this.searchRequest.toLowerCase());
+
+                        const matchesServiceFields =
+                            serviceName.includes(this.searchRequest.toLowerCase()) ||
+                            serviceFee.includes(this.searchRequest.toLowerCase()) ||
+                            accountName.includes(this.searchRequest.toLowerCase());
+
+                        return matchesRequestFields || matchesServiceFields;
+                    }
+                }
+                return false;
+            });
+        }
 
         // Apply minimum and maximum date filters
         if (this.minDate) {

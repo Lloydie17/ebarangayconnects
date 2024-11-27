@@ -153,7 +153,7 @@ nav {
 .image-placeholder img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures the image fills the placeholder area proportionally */
+    object-fit: cover;
 }
 
 /* Title and description styling */
@@ -229,6 +229,11 @@ blockquote {
     white-space: pre-line;
 }
 
+.navigation {
+    color: #fcac42;
+    font-weight: 600;
+}
+
 /* -S SECTION */
 
 .services-section {
@@ -286,6 +291,11 @@ blockquote {
     width: 300px;
     margin-top: -100px;
     margin-bottom: 70px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 350px;
 }
 
 .card2 img {
@@ -299,12 +309,18 @@ blockquote {
     font-weight: bold;
     font-size: 20px;
     color: #000000;
+    margin: 10px 0;
 }
 
 .card2 p {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 14px;
     color: #333;
+    margin: 10px 0;
+    flex-grow: 1; 
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
 
 .card2 button {
@@ -314,22 +330,23 @@ blockquote {
     background-size: 40px 15px;
     background-repeat: no-repeat;
     background-color: #4C7766;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
     color: #FCF6F5;
     border: none;
     border-radius: 7px;
     padding: 10px 30px;
     cursor: pointer;
-    margin-top: 15px;
+    margin-top: auto;
     text-indent: 10px;
 }
 
 .card-body-2{
-    -ms-flex:1 1 auto;
-    flex:1 1 auto;
-    min-height:1px;
-    padding:1.25rem
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
 }
 
 
@@ -359,7 +376,7 @@ blockquote {
     position: absolute;
     top: 20%;
     left: 12px;
-    z-index: 1000; /* Ensure the button is on top of the map */
+    z-index: 1000;
     background-color: #fff;
     border: none;
     cursor: pointer;
@@ -421,12 +438,12 @@ blockquote {
     width: auto;
     padding: 0;
     margin: 0;
-    z-index: 1000; /* Make sure it's above other elements */
+    z-index: 1000;
 }
 
 /* Wrapper for the alerts to manage spacing */
 .alert-wrapper {
-    max-width: 300px; /* Limit the alert width */
+    max-width: 300px; 
     width: 100%;
 }
 
@@ -438,7 +455,7 @@ blockquote {
     background-color: #fff;
     padding: 1rem 1.5rem;
     border-radius: 8px;
-    margin-bottom: 0.5rem; /* Add space between multiple alerts */
+    margin-bottom: 0.5rem; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     font-family: 'Poppins', sans-serif;
     color: #333;
@@ -485,7 +502,7 @@ blockquote {
 .alert-message {
     font-size: 1rem;
     margin: 0;
-    padding-right: 2rem; /* Space for the close button */
+    padding-right: 2rem; 
 }
 
 /* Notifications */
@@ -493,6 +510,17 @@ blockquote {
 .notification-wrapper {
     position: relative;
     cursor: pointer;
+  }
+
+  .notification-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
   }
   
   .notification-dropdown {
@@ -504,8 +532,8 @@ blockquote {
     width: 300px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    max-height: 400px; /* Max height of the dropdown */
-    overflow-y: auto; /* Enable vertical scroll */
+    max-height: 400px;
+    overflow-y: auto; 
   }
   
   .dropdown-header {
@@ -589,7 +617,6 @@ blockquote {
 .notification-dropdown::-webkit-scrollbar-thumb:hover {
     background-color: #999; 
 }
-  
 
 .barangay-info {
     white-space: pre-line;

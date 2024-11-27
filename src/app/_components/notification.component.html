@@ -1,6 +1,8 @@
 <div class="notification-wrapper" (click)="toggleNotificationDropdown()">
     <img src="https://firebasestorage.googleapis.com/v0/b/ebarangayconnect-cbd22.appspot.com/o/notification.svg?alt=media&token=b3ff34d1-6fea-486a-9fed-a40641c643b8" alt="notification" width="25">
   
+    <span *ngIf="newNotificationCount > 0" class="notification-count">{{ newNotificationCount }}</span>
+
     <!-- Notification Dropdown -->
     <div *ngIf="showNotificationDropdown" class="notification-dropdown">
       <div class="dropdown-header">

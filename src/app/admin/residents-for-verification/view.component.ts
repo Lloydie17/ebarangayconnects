@@ -12,6 +12,8 @@ export class ViewComponent implements OnInit {
     isAddMode: boolean;
     loading = false;
     resident: any = {};
+    isModalOpen: boolean = false;
+    selectedImage: string = '';
 
     constructor(
         private formBuilder: FormBuilder,
@@ -53,5 +55,16 @@ export class ViewComponent implements OnInit {
                     this.alertService.error('Error approving resident');
                 }
             );
+    }
+
+    openImageModal(imageUrl: string) {
+        this.selectedImage = imageUrl;
+        this.isModalOpen = true;
+    }
+
+    // Close modal
+    closeImageModal() {
+        this.isModalOpen = false;
+        this.selectedImage = '';
     }
 }

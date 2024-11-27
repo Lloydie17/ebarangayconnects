@@ -12,9 +12,9 @@ declare let L;
 })
 export class TrackComponent implements OnInit {
     residentName: string;
-    displayedResidentName: string; // Variable to hold the name to be displayed
-    residentLocation: any; // Object to hold latitude and longitude
-    showResidentName: boolean = false; // Control the visibility of the resident name label
+    displayedResidentName: string;
+    residentLocation: any; 
+    showResidentName: boolean = false; 
     map: L.Map;
     marker: L.Marker;
     satelliteLayer: L.TileLayer;
@@ -26,6 +26,7 @@ export class TrackComponent implements OnInit {
     routingControl: any;
     currentUserLatLng: L.LatLng;
     residentLoc: L.LatLng;
+    profilePicture: string;
 
     constructor(private residentService: ResidentService) { }
 
@@ -37,12 +38,10 @@ export class TrackComponent implements OnInit {
         this.initialLatLng = new L.LatLng(10.292033208062072, 123.89620623806424);
         this.map = L.map('map').setView(this.initialLatLng, 16.4);
 
-        // Street view layer
         this.streetLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         });
 
-        // Satellite view layer
         this.satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             attribution: 'Tiles © Esri'
         });
@@ -59,7 +58,6 @@ export class TrackComponent implements OnInit {
             attribution: '© OpenStreetMap, © CartoDB'
         });
 
-        // Add the street view layer by default
         this.streetLayer.addTo(this.map);
 
         const customIcon = L.icon({
@@ -73,7 +71,6 @@ export class TrackComponent implements OnInit {
 
         this.marker = L.marker(this.initialLatLng, { icon: customIcon }).bindPopup('Ermita Barangay Hall').addTo(this.map)
 
-        // Start the bouncing effect
         this.startBouncing(this.marker);
 
         this.barangayLayer = L.geoJSON(null, {
@@ -91,7 +88,6 @@ export class TrackComponent implements OnInit {
                 this.barangayLayer.addData(data);
             });
 
-        // Layer control to switch between street and satellite views
         const baseLayers = {
             "Street View": this.streetLayer,
             "Satellite View": this.satelliteLayer,
@@ -102,110 +98,97 @@ export class TrackComponent implements OnInit {
         L.control.layers(baseLayers).addTo(this.map);
     }
 
-    // Function to make the marker bounce
     startBouncing(marker: L.Marker) {
-        let bounceHeight = 5; // Height of the bounce in meters
-        let bounceStep = 0.0000025; // How much the marker moves per step
-        let goingUp = true; // To control the direction of movement
+        let bounceHeight = 5; 
+        let bounceStep = 0.0000025; 
+        let goingUp = true; 
 
-        const originalLatLng = marker.getLatLng(); // Store the original position of the marker
+        const originalLatLng = marker.getLatLng();
 
-        // Repeatedly move the marker up and down
         this.bounceInterval = setInterval(() => {
             let currentLatLng = marker.getLatLng();
             let newLat = currentLatLng.lat;
 
-            // Check if the marker is going up or down
             if (goingUp) {
                 newLat += bounceStep;
                 if (newLat >= originalLatLng.lat + bounceHeight / 100000) {
-                    goingUp = false; // Start going down when the bounce height is reached
+                    goingUp = false; 
                 }
             } else {
                 newLat -= bounceStep;
                 if (newLat <= originalLatLng.lat) {
-                    goingUp = true; // Start going up when it reaches the original position
+                    goingUp = true; 
                 }
             }
 
-            // Update the marker's position
             marker.setLatLng([newLat, originalLatLng.lng]);
-        }, 20); // Controls the speed of the bounce (20ms interval)
+        }, 20);
     }
 
     stopBouncing() {
-        // Stop the bouncing animation by clearing the interval
         if (this.bounceInterval) {
             clearInterval(this.bounceInterval);
         }
     }
 
     searchResident() {
-        // First filter the residents based on status (only approved ones)
-        this.residentService.getAll().subscribe((residents: any[]) => {
-            const approvedResidents = residents.filter(resident => resident.status && resident.dump);
-            
-            // Now check if the residentName exists in the approved residents list
-            const resident = approvedResidents.find(r => r.fullName.toLowerCase() === this.residentName.toLowerCase());
-    
-            if (resident) {
-                this.residentService.getResidentLocation(resident.fullName)
-                    .subscribe((data: any) => {
-                        console.log("Response from API:", data); 
-                        this.residentLocation = data;
-                        this.displayedResidentName = this.residentLocation.fullName;
-                        this.showResidentName = true;
-                        this.updateMap(this.residentLocation.latitude, this.residentLocation.longitude, this.residentLocation.fullName);
-                        this.residentLoc = this.residentLocation.latitude, this.residentLocation.longitude, this.residentLocation.fullName;
-                        
-                        // Call getRouteToLocation using user's current location and resident's location
-                        if (this.currentUserLatLng) {
-                            this.getRouteToLocation(this.currentUserLatLng.lat, this.currentUserLatLng.lng, this.residentLocation.latitude, this.residentLocation.longitude);
-                        } else {
-                            this.getRouteToLocation(this.initialLatLng.lat, this.initialLatLng.lng, this.residentLocation.latitude, this.residentLocation.longitude);
-                        }
-                    }, error => {
-                        console.log(error);
-                        this.showResidentName = false;
-                    });
-            } else {
-                console.log('Resident not found or not approved');
-                this.showResidentName = false;
-            }
-        }, error => {
-            console.log('Error fetching residents:', error);
-            this.showResidentName = false;
-        });
-    }
-    
+        this.residentService.getResidentLocation(this.residentName)
+            .subscribe((data: any) => {
+                console.log("Response from API:", data); 
+                this.residentLocation = data;
+                this.displayedResidentName = this.residentLocation.fullName;
+                this.showResidentName = true;
 
-    updateMap(latitude: number, longitude: number, fullName: string) {
+                // Profile Picture
+                this.profilePicture = this.residentLocation.profilePicture;
+
+                this.updateMap(this.residentLocation.latitude, this.residentLocation.longitude, this.residentLocation.fullName, this.profilePicture);
+                this.residentLoc = this.residentLocation.latitude, this.residentLocation.longitude, this.residentLocation.fullName;
+                
+                if (this.currentUserLatLng) {
+                    this.getRouteToLocation(this.currentUserLatLng.lat, this.currentUserLatLng.lng, this.residentLocation.latitude, this.residentLocation.longitude);
+                } else {
+                    this.marker
+                    this.getRouteToLocation(this.initialLatLng.lat, this.initialLatLng.lng, this.residentLocation.latitude, this.residentLocation.longitude);
+                }
+
+            }, error => {
+                console.log(error);
+                this.showResidentName = false;
+            });
+    }
+
+    updateMap(latitude: number, longitude: number, fullName: string, profilePicture: string) {
         console.log("Latitude:", latitude);
         console.log("Longitude:", longitude);
 
-        // Stop the bouncing effect before updating the position
         this.stopBouncing();
+
+        const popupContent = `
+        <div>
+            <img src="${profilePicture}" alt="${fullName}" style="width: 200px; height: 200px; border-radius:50%;"/>
+            <p><b>Resident's Name:</b> ${fullName}</p>
+        </div>
+    `;
 
         // Update the marker position and content
         this.map.setView([latitude, longitude], 20);
         this.marker.setLatLng([latitude, longitude]);
-        this.marker.setPopupContent(fullName).openPopup();
+        this.marker.setPopupContent(popupContent).openPopup();
 
         this.startBouncing(this.marker);
     }
 
     getUserLocation() {
         if (navigator.geolocation) {
-            // Use watchPosition to continuously track user's location
             navigator.geolocation.watchPosition(position => {
                 const userLatLng = new L.LatLng(position.coords.latitude, position.coords.longitude);
-                this.currentUserLatLng = userLatLng; // Store the updated user's current location
+                this.currentUserLatLng = userLatLng; 
     
-                this.stopBouncing(); // Stop bouncing to reset it
+                this.stopBouncing(); 
     
-                // Update userMarker's position if it already exists, else create a new marker
                 if (this.userMarker) {
-                    this.userMarker.setLatLng(userLatLng); // Update marker's position
+                    this.userMarker.setLatLng(userLatLng);
                 } else {
                     this.userMarker = L.marker(userLatLng, {
                         icon: L.icon({
@@ -217,7 +200,7 @@ export class TrackComponent implements OnInit {
                     }).bindPopup('Your Location').addTo(this.map);
                 }
     
-                // Restart the bouncing effect for the new marker position
+
                 this.startBouncing(this.userMarker);
     
                 let destinationLatLng;
@@ -226,11 +209,9 @@ export class TrackComponent implements OnInit {
                 } else {
                     destinationLatLng = this.initialLatLng;
                 }
-    
-                // Get the route from user's current location to the destination
+
                 this.getRouteToLocation(userLatLng.lat, userLatLng.lng, destinationLatLng.lat, destinationLatLng.lng);
     
-                // Center the map to the user's current location
                 this.map.setView(userLatLng, 20);
             }, error => {
                 console.error("Error getting user's location:", error);
@@ -251,24 +232,24 @@ export class TrackComponent implements OnInit {
 
         this.routingControl = L.Routing.control({
             waypoints: [
-                L.latLng(startLat, startLng), // Start from current user location
-                L.latLng(endLat, endLng)      // End at resident's location
+                L.latLng(startLat, startLng), 
+                L.latLng(endLat, endLng)      
             ],
             routeWhileDragging: true,
-            createMarker: () => null, // Prevents markers from being created
-            show: false, // Hides the route summary
-            addWaypoints: false, // Disables interactive waypoint adding
+            createMarker: () => null, 
+            show: false,
+            addWaypoints: false, 
             lineOptions: {
                 styles: [{ color: '#6497b1', weight: 5, opacity: 0.7 }],
-                addWaypoints: false // Disables waypoint handles on the route line
+                addWaypoints: false 
             },
             formatter: new L.Routing.Formatter({
                 language: 'en',
                 units: 'metric'
             }),
-            showAlternatives: false, // Hides alternative routes
-            fitSelectedRoutes: true, // Ensures the route is shown on the map without zoom issues
-            draggableWaypoints: false, // Prevents waypoints from being draggable
+            showAlternatives: false, 
+            fitSelectedRoutes: true, 
+            draggableWaypoints: false,
         }).addTo(this.map);
     }
 }

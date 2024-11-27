@@ -7,10 +7,10 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <!-- Full Name -->
+                        <!-- Fullname -->
                         <div class="row-md-3 mb-3">
                             <label for="requestName" class="req-text">Name of Proprietor/Manager</label>
-                            <input type="text" formControlName="requestName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.requestName.errors }" placeholder="Enter your Full Name." />
+                            <input type="text" formControlName="requestName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.requestName.errors }" placeholder="Enter the Name of Proprietor/Manager." />
                             <div *ngIf="submitted && f.requestName.errors" class="invalid-feedback">
                                 <div *ngIf="f.requestName.errors.required">Full Name is required</div>
                             </div>

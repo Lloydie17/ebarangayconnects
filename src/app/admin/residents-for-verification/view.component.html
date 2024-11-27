@@ -9,13 +9,23 @@
                 <div class="col-md-3 text-center">
                     <label for="profilePicture">Profile Picture</label>
                     <div class="mb-3">
-                        <img [src]="resident.profilePicture" alt="Profile Picture" class="img-thumbnail" style="width: 200px; height: 200px;">
+                        <img 
+                            [src]="resident.profilePicture" 
+                            alt="Profile Picture" 
+                            class="img-thumbnail" 
+                            style="width: 200px; height: 200px; cursor: pointer;" 
+                            (click)="openImageModal(resident.profilePicture)">
                         <br>
                     </div>
                     <br>
                     <label for="profilePicture">Government ID</label>
                     <div class="mb-3">
-                        <img [src]="resident.idPicture" alt="Profile Picture" class="img-thumbnail" style="width: 200px; height: 200px;">
+                        <img 
+                            [src]="resident.idPicture" 
+                            alt="Government ID" 
+                            class="img-thumbnail" 
+                            style="width: 200px; height: 200px; cursor: pointer;" 
+                            (click)="openImageModal(resident.idPicture)">
                         <br>
                     </div>
                 </div>
@@ -114,6 +124,23 @@
             <div class="d-flex justify-content-end mt-5">
                 <a routerLink="/admin/verification" type="button" class="btn btn-secondary me-3">Cancel</a>
                 <button class="btn btn-success" (click)="approveResident(resident.residentId)">Approve</button>
+            </div>
+
+             <!-- Modal -->
+             <div class="modal" tabindex="-1" [class.show]="isModalOpen" [style.display]="isModalOpen ? 'block' : 'none'">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Image Preview</h5>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img [src]="selectedImage" alt="Full-size image" class="img-fluid">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" (click)="closeImageModal()">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>

@@ -60,10 +60,17 @@
                             <input class="form-control" id="birthDate" type="text" name="birthday" [value]="(account.birthDate | date:'MMMM d, y')" disabled>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label class="small mb-1" for="civilStatus">Civil status</label>
-                        <input class="form-control" id="civilStatus" type="text" [value]="account.civilStatus" disabled>
+                    <div class="row gx-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="civilStatus">Civil status</label>
+                            <input class="form-control" id="civilStatus" type="text" [value]="account.civilStatus" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="isActive">Status</label>
+                            <input class="form-control" id="isActive" type="text" [value]="account.isActive ? 'Active' : 'Inactive'" disabled>
+                        </div>
                     </div>
+                    
                 </form>
             </div>
         </div>

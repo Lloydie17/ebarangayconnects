@@ -26,6 +26,14 @@ export class AnnouncementService {
         return this.announcementSubject.value;
     }
 
+    getNext(id: string) {
+        return this.http.get<Announcement>(`${baseUrl}/${id}/next`);
+    }
+
+    getPrevious(id: string) {
+        return this.http.get<Announcement>(`${baseUrl}/${id}/previous`);
+    }
+
     getAll() {
         return this.http.get<Announcement[]>(baseUrl)
     }
@@ -52,4 +60,5 @@ export class AnnouncementService {
     delete(id: string) {
         return this.http.delete(`${baseUrl}/${id}`);
     }
+    
 }

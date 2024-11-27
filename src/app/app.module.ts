@@ -3,13 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { NgChartsModule } from 'ng2-charts';
 
 // used to create fake backend
 // import { fakeBackendProvider } from './_helpers';
 
 import { AppRoutingModule } from './app-routing.module';
 import { JwtInterceptor, ErrorInterceptor, appInitializer } from './_helpers';
-import { AccountService, ResidentService, ResidentRecordService } from './_services';
+import { AccountService, ResidentService } from './_services';
 import { AppComponent } from './app.component';
 import { AlertComponent, NotificationComponent } from './_components';
 import { HomeComponent } from './home';
@@ -24,7 +25,8 @@ import { AnnouncementComponent, AnnouncementViewComponent } from './announcement
         ReactiveFormsModule,
         HttpClientModule,
         AppRoutingModule,
-        CommonModule
+        CommonModule,
+        NgChartsModule
     ],
     declarations: [
         AppComponent,
@@ -44,7 +46,6 @@ import { AnnouncementComponent, AnnouncementViewComponent } from './announcement
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         ResidentService,
-        ResidentRecordService,
 
         // provider used to create fake backend
         //fakeBackendProvider
